@@ -106,11 +106,10 @@ let%test _ = padovan 10 = 4
 
 let estPremier n =
   let rec divisor d =
-    if float_of_int d > sqrt (float_of_int n) then true
-    else if n mod d = 0 then false
-    else divisor (d + 1)
+    (not (n mod d = 0))
+    && (float_of_int d > sqrt (float_of_int n) || divisor (d + 1))
   in
-  if n < 2 then false else divisor 2
+  n = 2 || ((not (n < 2)) && divisor 2)
 
 let%test _ = estPremier 2
 let%test _ = estPremier 3
