@@ -103,13 +103,12 @@ let%test _ = padovan 10 = 4
    Précondition : n >= 0
    Résultat : l'information de si n est premier ou pas
 *)
-
 let estPremier n =
   let rec divisor d =
-    (not (n mod d = 0))
-    && (float_of_int d > sqrt (float_of_int n) || divisor (d + 1))
+    float_of_int d > sqrt (float_of_int n)
+    || ((not (n mod d = 0)) && divisor (d + 1))
   in
-  n = 2 || ((not (n < 2)) && divisor 2)
+  (not (n < 2)) && divisor 2
 
 let%test _ = estPremier 2
 let%test _ = estPremier 3
