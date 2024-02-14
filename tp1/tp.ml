@@ -68,20 +68,29 @@ let%test _ = ieme ('r', 'e', 'l') 3 = 'l'
    Précondition : n >=0
    Résultat : un entier la nième valeur de la suite de Padovan
 *)
+let rec padovan_naive n =
+  if n < 2 then 0
+  else if n = 2 then 1
+  else padovan_naive (n - 2) + padovan_naive (n - 3)
 
-(* let padovan n = failwith "TO DO"
+let padovan n =
+  let rec padovan_ p padovan_p_1 padovan_p_2 padovan_p_3 =
+    if p = n then padovan_p_2 + padovan_p_3
+    else padovan_ (p + 1) (padovan_p_2 + padovan_p_3) padovan_p_1 padovan_p_2
+  in
+  if n < 2 then 0 else if n = 2 then 1 else padovan_ 3 1 0 0
 
-   let%test _ = padovan 0 = 0
-   let%test _ = padovan 1 = 0
-   let%test _ = padovan 2 = 1
-   let%test _ = padovan 3 = 0
-   let%test _ = padovan 4 = 1
-   let%test _ = padovan 5 = 1
-   let%test _ = padovan 6 = 1
-   let%test _ = padovan 7 = 2
-   let%test _ = padovan 8 = 2
-   let%test _ = padovan 9 = 3
-   let%test _ = padovan 10 = 4 *)
+let%test _ = padovan 0 = 0
+let%test _ = padovan 1 = 0
+let%test _ = padovan 2 = 1
+let%test _ = padovan 3 = 0
+let%test _ = padovan 4 = 1
+let%test _ = padovan 5 = 1
+let%test _ = padovan 6 = 1
+let%test _ = padovan 7 = 2
+let%test _ = padovan 8 = 2
+let%test _ = padovan 9 = 3
+let%test _ = padovan 10 = 4
 
 (* Exercice 7 *)
 (* estPremier : int -> bool
