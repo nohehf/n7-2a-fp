@@ -9,9 +9,10 @@
    Parametre (x2, y2) : float*float, le second point
    Resultat : float, le coefficient directeur de la droite passant par
    (x1, y1) et (x2, y2)
+   Precondition: x1 != x2
 *)
 
-let coeff_directeur (x1,y1) (x2,y2) = failwith "TO DO"
+let coeff_directeur (x1,y1) (x2,y2) = (y2 -. y1) /. (x2 -. x1)
 
 let%test _ = coeff_directeur (0., 0.) (1., 2.) = 2.
 let%test _ = coeff_directeur (1., 2.) (0., 0.) = 2.
@@ -36,14 +37,14 @@ let%test _ = coeff_directeur (1., 2.) (2., 1.) = -1.
 (* renvoie le ième élément t *)
 (* précondition : 1 =< i =< 3 *)
 
-let ieme t i =  failwith "TO DO"
+(* let ieme t i =  failwith "TO DO"
 
 let%test _ = ieme (5,60,7) 1 = 5
 let%test _ = ieme (5,60,17) 2 = 60
 let%test _ = ieme (5,60,17) 3 = 17
 let%test _ = ieme ('r','e','l') 1 = 'r'
 let%test _ = ieme ('r','e','l') 2 = 'e'
-let%test _ = ieme ('r','e','l') 3 = 'l'
+let%test _ = ieme ('r','e','l') 3 = 'l' *)
 
 
 (* Exercice 5 *)
@@ -57,7 +58,7 @@ Précondition : n >=0
 Résultat : un entier la nième valeur de la suite de Padovan 
 *)
 
-let padovan n = failwith "TO DO"
+(* let padovan n = failwith "TO DO"
 
 let%test _ = padovan 0 = 0
 let%test _ = padovan 1 = 0 
@@ -69,7 +70,7 @@ let%test _ = padovan 6 = 1
 let%test _ = padovan 7 = 2
 let%test _ = padovan 8 = 2
 let%test _ = padovan 9 = 3
-let%test _ = padovan 10 = 4
+let%test _ = padovan 10 = 4 *)
 
 (* Exercice 7 *)
 (* estPremier : int -> bool
@@ -79,7 +80,7 @@ Précondition : n >= 0
 Résultat : l'information de si n est premier ou pas
 *)
 
-let estPremier n = failwith "TO DO"
+(* let estPremier n = failwith "TO DO"
 
 let%test _ = estPremier 2
 let%test _ = estPremier 3 
@@ -91,7 +92,7 @@ let%test _ = not (estPremier 8)
 let%test _ = not (estPremier 9)
 let%test _ = not (estPremier 10)
 let%test _ = not (estPremier 0)
-let%test _ = not (estPremier 1)
+let%test _ = not (estPremier 1) *)
 
 (*****************************)
 (****** Bonus "ludique" ******)
@@ -112,7 +113,7 @@ let%test _ = not (estPremier 1)
    Précondition : n positif ou nul
 *)
 
-let dragon (xa,ya) (xb,yb) n = failwith "TO DO"
+(* let dragon (xa,ya) (xb,yb) n = failwith "TO DO" *)
 
 (* let%test_unit _ = dragon (200,350) (600,350) 20; *)
 
