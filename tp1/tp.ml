@@ -67,12 +67,16 @@ let%test _ = ieme ('r', 'e', 'l') 3 = 'l'
    Paramètre n : un entier représentant la nième valeur à calculer
    Précondition : n >=0
    Résultat : un entier la nième valeur de la suite de Padovan
+   Complexité : O(e^n)
 *)
 let rec padovan_naive n =
   if n < 2 then 0
   else if n = 2 then 1
   else padovan_naive (n - 2) + padovan_naive (n - 3)
 
+(*
+    Complexité : O(n)
+*)
 let padovan n =
   let rec padovan_ p padovan_p_1 padovan_p_2 padovan_p_3 =
     if p = n then padovan_p_2 + padovan_p_3
@@ -100,19 +104,25 @@ let%test _ = padovan 10 = 4
    Résultat : l'information de si n est premier ou pas
 *)
 
-(* let estPremier n = failwith "TO DO"
+let estPremier n =
+  let rec divisor d =
+    if float_of_int d > sqrt (float_of_int n) then true
+    else if n mod d = 0 then false
+    else divisor (d + 1)
+  in
+  if n < 2 then false else divisor 2
 
-   let%test _ = estPremier 2
-   let%test _ = estPremier 3
-   let%test _ = not (estPremier 4)
-   let%test _ = estPremier 5
-   let%test _ = not (estPremier 6)
-   let%test _ = estPremier 7
-   let%test _ = not (estPremier 8)
-   let%test _ = not (estPremier 9)
-   let%test _ = not (estPremier 10)
-   let%test _ = not (estPremier 0)
-   let%test _ = not (estPremier 1) *)
+let%test _ = estPremier 2
+let%test _ = estPremier 3
+let%test _ = not (estPremier 4)
+let%test _ = estPremier 5
+let%test _ = not (estPremier 6)
+let%test _ = estPremier 7
+let%test _ = not (estPremier 8)
+let%test _ = not (estPremier 9)
+let%test _ = not (estPremier 10)
+let%test _ = not (estPremier 0)
+let%test _ = not (estPremier 1)
 
 (*****************************)
 (****** Bonus "ludique" ******)
