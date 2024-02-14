@@ -2,10 +2,11 @@
 (*
    pgcd: int -> int -> int
    Calcule le pgcd de a et b
-   Parametres: a et b, entiers naturels
-   Precodition: a et b strictement positifs
+   Parametres: a et b, entiers relatifs
+   Precodition: a et b non nulls
 *)
-let rec pgcd a b =
+let rec pgcd n1 n2 =
+  let a, b = (abs n1, abs n2) in
   if a = b then a else if a > b then pgcd (a - b) b else pgcd a (b - a)
 
 let%test _ = pgcd 1 1 = 1
@@ -23,3 +24,11 @@ let%test _ = pgcd 7 3 = 1
 (* relatively primes *)
 let%test _ = pgcd 20 9 = 1
 let%test _ = pgcd 9 20 = 1
+
+(* With negative values *)
+let%test _ = pgcd (-1) 1 = 1
+let%test _ = pgcd 1 (-1) = 1
+let%test _ = pgcd (-1) (-1) = 1
+let%test _ = pgcd (-126) 54 = 18
+let%test _ = pgcd 126 (-54) = 18
+let%test _ = pgcd (-126) (-54) = 18
