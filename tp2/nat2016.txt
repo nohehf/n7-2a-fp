@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html  dir="ltr" lang="fr" xml:lang="fr">
+<head>
+    <title>PF_IR | MoodleN7</title>
+    <link rel="icon" href="https://moodle-n7.inp-toulouse.fr/theme/image.php/adaptable/theme/1707383220/favicon" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="moodle, PF_IR | MoodleN7" />
+<link rel="stylesheet" type="text/css" href="https://moodle-n7.inp-toulouse.fr/theme/yui_combo.php?rollup/3.17.2/yui-moodlesimple-min.css" /><script id="firstthemesheet" type="text/css">/** Required in order to fix style inclusion problems in IE with YUI **/</script><link rel="stylesheet" type="text/css" href="https://moodle-n7.inp-toulouse.fr/theme/styles.php/adaptable/1707383220_1/all" />
+<script>
+//<![CDATA[
+var M = {}; M.yui = {};
+M.pageloadstarttime = new Date();
+M.cfg = {"wwwroot":"https:\/\/moodle-n7.inp-toulouse.fr","homeurl":{},"sesskey":"lHnWY5J29I","sessiontimeout":"14400","sessiontimeoutwarning":1200,"themerev":"1707383220","slasharguments":1,"theme":"adaptable","iconsystemmodule":"core\/icon_system_fontawesome","jsrev":"1707383220","admin":"admin","svgicons":true,"usertimezone":"Europe\/Paris","language":"fr","courseId":1943,"courseContextId":70276,"contextid":70276,"contextInstanceId":1943,"langrev":1708660322,"templaterev":"1707383220"};var yui1ConfigFn = function(me) {if(/-skin|reset|fonts|grids|base/.test(me.name)){me.type='css';me.path=me.path.replace(/\.js/,'.css');me.path=me.path.replace(/\/yui2-skin/,'/assets/skins/sam/yui2-skin')}};
+var yui2ConfigFn = function(me) {var parts=me.name.replace(/^moodle-/,'').split('-'),component=parts.shift(),module=parts[0],min='-min';if(/-(skin|core)$/.test(me.name)){parts.pop();me.type='css';min=''}
+if(module){var filename=parts.join('-');me.path=component+'/'+module+'/'+filename+min+'.'+me.type}else{me.path=component+'/'+component+'.'+me.type}};
+YUI_config = {"debug":false,"base":"https:\/\/moodle-n7.inp-toulouse.fr\/lib\/yuilib\/3.17.2\/","comboBase":"https:\/\/moodle-n7.inp-toulouse.fr\/theme\/yui_combo.php?","combine":true,"filter":null,"insertBefore":"firstthemesheet","groups":{"yui2":{"base":"https:\/\/moodle-n7.inp-toulouse.fr\/lib\/yuilib\/2in3\/2.9.0\/build\/","comboBase":"https:\/\/moodle-n7.inp-toulouse.fr\/theme\/yui_combo.php?","combine":true,"ext":false,"root":"2in3\/2.9.0\/build\/","patterns":{"yui2-":{"group":"yui2","configFn":yui1ConfigFn}}},"moodle":{"name":"moodle","base":"https:\/\/moodle-n7.inp-toulouse.fr\/theme\/yui_combo.php?m\/1707383220\/","combine":true,"comboBase":"https:\/\/moodle-n7.inp-toulouse.fr\/theme\/yui_combo.php?","ext":false,"root":"m\/1707383220\/","patterns":{"moodle-":{"group":"moodle","configFn":yui2ConfigFn}},"filter":null,"modules":{"moodle-core-formchangechecker":{"requires":["base","event-focus","moodle-core-event"]},"moodle-core-lockscroll":{"requires":["plugin","base-build"]},"moodle-core-actionmenu":{"requires":["base","event","node-event-simulate"]},"moodle-core-languninstallconfirm":{"requires":["base","node","moodle-core-notification-confirm","moodle-core-notification-alert"]},"moodle-core-chooserdialogue":{"requires":["base","panel","moodle-core-notification"]},"moodle-core-popuphelp":{"requires":["moodle-core-tooltip"]},"moodle-core-tooltip":{"requires":["base","node","io-base","moodle-core-notification-dialogue","json-parse","widget-position","widget-position-align","event-outside","cache-base"]},"moodle-core-blocks":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification"]},"moodle-core-notification":{"requires":["moodle-core-notification-dialogue","moodle-core-notification-alert","moodle-core-notification-confirm","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-core-notification-dialogue":{"requires":["base","node","panel","escape","event-key","dd-plugin","moodle-core-widget-focusafterclose","moodle-core-lockscroll"]},"moodle-core-notification-alert":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-confirm":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-exception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-ajaxexception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-dragdrop":{"requires":["base","node","io","dom","dd","event-key","event-focus","moodle-core-notification"]},"moodle-core-event":{"requires":["event-custom"]},"moodle-core-handlebars":{"condition":{"trigger":"handlebars","when":"after"}},"moodle-core-maintenancemodetimer":{"requires":["base","node"]},"moodle-core_availability-form":{"requires":["base","node","event","event-delegate","panel","moodle-core-notification-dialogue","json"]},"moodle-backup-confirmcancel":{"requires":["node","node-event-simulate","moodle-core-notification-confirm"]},"moodle-backup-backupselectall":{"requires":["node","event","node-event-simulate","anim"]},"moodle-course-management":{"requires":["base","node","io-base","moodle-core-notification-exception","json-parse","dd-constrain","dd-proxy","dd-drop","dd-delegate","node-event-delegate"]},"moodle-course-categoryexpander":{"requires":["node","event-key"]},"moodle-course-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-course-coursebase","moodle-course-util"]},"moodle-course-util":{"requires":["node"],"use":["moodle-course-util-base"],"submodules":{"moodle-course-util-base":{},"moodle-course-util-section":{"requires":["node","moodle-course-util-base"]},"moodle-course-util-cm":{"requires":["node","moodle-course-util-base"]}}},"moodle-form-shortforms":{"requires":["node","base","selector-css3","moodle-core-event"]},"moodle-form-passwordunmask":{"requires":[]},"moodle-form-dateselector":{"requires":["base","node","overlay","calendar"]},"moodle-question-preview":{"requires":["base","dom","event-delegate","event-key","core_question_engine"]},"moodle-question-searchform":{"requires":["base","node"]},"moodle-question-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-availability_completion-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_date-form":{"requires":["base","node","event","io","moodle-core_availability-form"]},"moodle-availability_grade-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_group-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_grouping-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_password-popup":{"requires":["base","node","event","moodle-core-notification-dialogue","io-base"]},"moodle-availability_password-form":{"requires":["base","node","event","event-valuechange","moodle-core_availability-form"]},"moodle-availability_profile-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-mod_assign-history":{"requires":["node","transition"]},"moodle-mod_attendance-groupfilter":{"requires":["base","node"]},"moodle-mod_checklist-linkselect":{"requires":["node","event-valuechange"]},"moodle-mod_customcert-rearrange":{"requires":["dd-delegate","dd-drag"]},"moodle-mod_quiz-quizbase":{"requires":["base","node"]},"moodle-mod_quiz-autosave":{"requires":["base","node","event","event-valuechange","node-event-delegate","io-form"]},"moodle-mod_quiz-modform":{"requires":["base","node","event"]},"moodle-mod_quiz-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-base","moodle-mod_quiz-util-page","moodle-mod_quiz-util-slot","moodle-course-util"]},"moodle-mod_quiz-toolboxes":{"requires":["base","node","event","event-key","io","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-slot","moodle-core-notification-ajaxexception"]},"moodle-mod_quiz-util":{"requires":["node","moodle-core-actionmenu"],"use":["moodle-mod_quiz-util-base"],"submodules":{"moodle-mod_quiz-util-base":{},"moodle-mod_quiz-util-slot":{"requires":["node","moodle-mod_quiz-util-base"]},"moodle-mod_quiz-util-page":{"requires":["node","moodle-mod_quiz-util-base"]}}},"moodle-mod_quiz-questionchooser":{"requires":["moodle-core-chooserdialogue","moodle-mod_quiz-util","querystring-parse"]},"moodle-message_airnotifier-toolboxes":{"requires":["base","node","io"]},"moodle-filter_glossary-autolinker":{"requires":["base","node","io-base","json-parse","event-delegate","overlay","moodle-core-event","moodle-core-notification-alert","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-filter_mathjaxloader-loader":{"requires":["moodle-core-event"]},"moodle-editor_atto-rangy":{"requires":[]},"moodle-editor_atto-editor":{"requires":["node","transition","io","overlay","escape","event","event-simulate","event-custom","node-event-html5","node-event-simulate","yui-throttle","moodle-core-notification-dialogue","moodle-core-notification-confirm","moodle-editor_atto-rangy","handlebars","timers","querystring-stringify"]},"moodle-editor_atto-plugin":{"requires":["node","base","escape","event","event-outside","handlebars","event-custom","timers","moodle-editor_atto-menu"]},"moodle-editor_atto-menu":{"requires":["moodle-core-notification-dialogue","node","event","event-custom"]},"moodle-editor_ousupsub-rangy":{"requires":[]},"moodle-editor_ousupsub-editor":{"requires":["base","node","event","event-custom","moodle-editor_ousupsub-rangy"]},"moodle-report_eventlist-eventfilter":{"requires":["base","event","node","node-event-delegate","datatable","autocomplete","autocomplete-filters"]},"moodle-report_loglive-fetchlogs":{"requires":["base","event","node","io","node-event-delegate"]},"moodle-gradereport_history-userselector":{"requires":["escape","event-delegate","event-key","handlebars","io-base","json-parse","moodle-core-notification-dialogue"]},"moodle-qbank_editquestion-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-tool_capability-search":{"requires":["base","node"]},"moodle-tool_lp-dragdrop-reorder":{"requires":["moodle-core-dragdrop"]},"moodle-tool_monitor-dropdown":{"requires":["base","event","node"]},"moodle-assignfeedback_editpdf-editor":{"requires":["base","event","node","io","graphics","json","event-move","event-resize","transition","querystring-stringify-simple","moodle-core-notification-dialog","moodle-core-notification-alert","moodle-core-notification-warning","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-atto_accessibilitychecker-button":{"requires":["color-base","moodle-editor_atto-plugin"]},"moodle-atto_accessibilityhelper-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_align-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_bold-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_charmap-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_clear-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_collapse-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emojipicker-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emoticon-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_equation-button":{"requires":["moodle-editor_atto-plugin","moodle-core-event","io","event-valuechange","tabview","array-extras"]},"moodle-atto_fullscreen-button":{"requires":["event-resize","moodle-editor_atto-plugin"]},"moodle-atto_h5p-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_html-button":{"requires":["promise","moodle-editor_atto-plugin","moodle-atto_html-beautify","moodle-atto_html-codemirror","event-valuechange"]},"moodle-atto_html-beautify":{},"moodle-atto_html-codemirror":{"requires":["moodle-atto_html-codemirror-skin"]},"moodle-atto_image-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_indent-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_italic-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_justify-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_link-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-usedfiles":{"requires":["node","escape"]},"moodle-atto_managefiles-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_media-button":{"requires":["moodle-editor_atto-plugin","moodle-form-shortforms"]},"moodle-atto_noautolink-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_orderedlist-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_recordrtc-recording":{"requires":["moodle-atto_recordrtc-button"]},"moodle-atto_recordrtc-button":{"requires":["moodle-editor_atto-plugin","moodle-atto_recordrtc-recording"]},"moodle-atto_rtl-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_strike-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_subscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_superscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_table-button":{"requires":["moodle-editor_atto-plugin","moodle-editor_atto-menu","event","event-valuechange"]},"moodle-atto_templates4u-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_title-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_underline-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_undo-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_unorderedlist-button":{"requires":["moodle-editor_atto-plugin"]}}},"gallery":{"name":"gallery","base":"https:\/\/moodle-n7.inp-toulouse.fr\/lib\/yuilib\/gallery\/","combine":true,"comboBase":"https:\/\/moodle-n7.inp-toulouse.fr\/theme\/yui_combo.php?","ext":false,"root":"gallery\/1707383220\/","patterns":{"gallery-":{"group":"gallery"}}}},"modules":{"core_filepicker":{"name":"core_filepicker","fullpath":"https:\/\/moodle-n7.inp-toulouse.fr\/lib\/javascript.php\/1707383220\/repository\/filepicker.js","requires":["base","node","node-event-simulate","json","async-queue","io-base","io-upload-iframe","io-form","yui2-treeview","panel","cookie","datatable","datatable-sort","resize-plugin","dd-plugin","escape","moodle-core_filepicker","moodle-core-notification-dialogue"]},"core_comment":{"name":"core_comment","fullpath":"https:\/\/moodle-n7.inp-toulouse.fr\/lib\/javascript.php\/1707383220\/comment\/comment.js","requires":["base","io-base","node","json","yui2-animation","overlay","escape"]},"mathjax":{"name":"mathjax","fullpath":"https:\/\/cdn.jsdelivr.net\/npm\/mathjax@2.7.9\/MathJax.js?delayStartupUntil=configured"}}};
+M.yui.loader = {modules: {}};
+
+//]]>
+</script>
+
+<meta name="robots" content="noindex" />    <!-- CSS print media -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" value="summary">
+    <meta name="twitter:site" value="Moodle N7" />
+    <meta name="twitter:title" value="PF_IR | MoodleN7" />
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="PF_IR | MoodleN7" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta name="og:site_name" value="Moodle N7" />
+
+    <!-- Chrome, Firefox OS and Opera on Android topbar color -->
+    <meta name="theme-color" content="#2871FA" />
+
+    <!-- Windows Phone topbar color -->
+    <meta name="msapplication-navbutton-color" content="#2871FA" />
+
+    <!-- iOS Safari topbar color -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2871FA" />
+
+    </head>
+<body  id="page-enrol-index" class="format-tiles limitedwidth  path-enrol dir-ltr lang-fr yui-skin-sam yui3-skin-sam moodle-n7-inp-toulouse-fr pagelayout-incourse course-1943 context-70276 category-692 theme_adaptable two-column  fullin header-style1 showblockicons standard uses-drawers nomobilenavigation">
+
+<div>
+    <a class="sr-only sr-only-focusable" href="#maincontent">Passer au contenu principal</a>
+</div><script src="https://moodle-n7.inp-toulouse.fr/lib/javascript.php/1707383220/lib/polyfills/polyfill.js"></script>
+<script src="https://moodle-n7.inp-toulouse.fr/theme/yui_combo.php?rollup/3.17.2/yui-moodlesimple-min.js"></script><script src="https://moodle-n7.inp-toulouse.fr/theme/jquery.php/core/jquery-3.6.1.min.js"></script>
+<script src="https://moodle-n7.inp-toulouse.fr/theme/jquery.php/theme_adaptable/pace-min.js"></script>
+<script src="https://moodle-n7.inp-toulouse.fr/theme/jquery.php/theme_adaptable/jquery-flexslider-min.js"></script>
+<script src="https://moodle-n7.inp-toulouse.fr/theme/jquery.php/theme_adaptable/tickerme.js"></script>
+<script src="https://moodle-n7.inp-toulouse.fr/theme/jquery.php/theme_adaptable/jquery-easing-min.js"></script>
+<script src="https://moodle-n7.inp-toulouse.fr/theme/jquery.php/theme_adaptable/adaptable_v2_1_1_2.js"></script>
+<script src="https://moodle-n7.inp-toulouse.fr/lib/javascript.php/1707383220/lib/javascript-static.js"></script>
+<script>
+//<![CDATA[
+document.body.className += ' jsenabled';
+//]]>
+</script>
+
+
+<div id="page-wrapper">
+    <div  class="drawer drawer-left show d-print-none not-initialized" data-region="fixed-drawer" id="theme_adaptable-drawers-sidepost" data-preference="drawer-open-block" data-state="show-drawer-left" data-forceopen="" data-close-on-resize="1">
+    <div class="drawerheader">
+        <button
+            class="btn drawertoggle icon-no-margin hidden"
+            data-toggler="drawers"
+            data-action="closedrawer"
+            data-target="theme_adaptable-drawers-sidepost"
+            data-toggle="tooltip"
+            data-placement="right"
+            title="Fermer le tiroir des blocs"
+        >
+            <i class="icon fa fa-times fa-fw " aria-hidden="true"  ></i>
+        </button>
+    </div>
+    <div class="drawercontent drag-container" data-usertour="scroller">
+                    <section class="d-print-none" aria-label="Blocs">
+                
+                <aside id="block-region-side-post" class="block-region" data-blockregion="side-post" data-droptarget="1"><a class="skip skip-block" id="fsb-2" href="#sb-2">Passer Navigation</a><section id="inst10939" class="block_navigation block mb-3" role="navigation" data-block="navigation" data-instanceid="10939" aria-labelledby="instance-10939-header"><div class="header"><div class="title"><div class="block_action"></div><h2 class="d-inline" id="instance-10939-header">Navigation</h2><div class="block-controls float-right"></div></div></div><div class="content"><ul class="block_tree list" role="tree" data-ajax-loader="block_navigation/nav_loader"><li class="type_unknown depth_1 contains_branch" role="treeitem" aria-expanded="true" aria-owns="random65d89ced194643_group" data-collapsible="false" aria-labelledby="random65d89ced194642_label_1_1"><p class="tree_item branch navigation_node"><a tabindex="-1" id="random65d89ced194642_label_1_1" href="https://moodle-n7.inp-toulouse.fr/">Accueil</a></p><ul id="random65d89ced194643_group" role="group"><li class="type_course depth_2 contains_branch" role="treeitem" aria-expanded="false" aria-owns="random65d89ced194645_group" aria-labelledby="random65d89ced194644_label_2_2"><p class="tree_item branch"><span tabindex="-1" id="random65d89ced194644_label_2_2" title="Moodle N7">Pages du site</span></p><ul id="random65d89ced194645_group" role="group" aria-hidden="true"><li class="type_custom depth_3 item_with_icon" role="treeitem" aria-labelledby="random65d89ced194646_label_3_4"><p class="tree_item hasicon"><a tabindex="-1" id="random65d89ced194646_label_3_4" href="https://moodle-n7.inp-toulouse.fr/my/courses.php"><i class="icon fa fa-fw fa-fw navicon" aria-hidden="true"  ></i><span class="item-content-wrap">Mes cours</span></a></p></li><li class="type_setting depth_3 item_with_icon" role="treeitem" aria-labelledby="random65d89ced194646_label_3_5"><p class="tree_item hasicon"><a tabindex="-1" id="random65d89ced194646_label_3_5" href="https://moodle-n7.inp-toulouse.fr/tag/search.php"><i class="icon fa fa-fw fa-fw navicon" aria-hidden="true"  ></i><span class="item-content-wrap">Tags</span></a></p></li></ul></li><li class="type_system depth_2 item_with_icon" role="treeitem" aria-labelledby="random65d89ced194644_label_2_7"><p class="tree_item hasicon"><a tabindex="-1" id="random65d89ced194644_label_2_7" href="https://moodle-n7.inp-toulouse.fr/my/courses.php"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true"  ></i><span class="item-content-wrap">Mes cours</span></a></p></li><li class="type_system depth_2 contains_branch" role="treeitem" aria-expanded="true" aria-owns="random65d89ced1946410_group" aria-labelledby="random65d89ced194644_label_2_8"><p class="tree_item branch canexpand"><a tabindex="-1" id="random65d89ced194644_label_2_8" href="https://moodle-n7.inp-toulouse.fr/course/index.php">Cours</a></p><ul id="random65d89ced1946410_group" role="group"><li class="type_category depth_3 contains_branch" role="treeitem" aria-expanded="true" aria-owns="random65d89ced1946412_group" aria-labelledby="random65d89ced1946411_label_3_9"><p class="tree_item branch canexpand"><a tabindex="-1" id="random65d89ced1946411_label_3_9" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=365">Département Sciences du Numérique (SN)</a></p><ul id="random65d89ced1946412_group" role="group"><li class="type_category depth_4 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_366" data-node-key="366" data-node-type="10" aria-labelledby="random65d89ced1946413_label_4_10"><p class="tree_item branch" id="expandable_branch_10_366"><a tabindex="-1" id="random65d89ced1946413_label_4_10" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=366">1ère année FISE</a></p></li><li class="type_category depth_4 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_207" data-node-key="207" data-node-type="10" aria-labelledby="random65d89ced1946413_label_4_11"><p class="tree_item branch" id="expandable_branch_10_207"><a tabindex="-1" id="random65d89ced1946413_label_4_11" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=207">1ère année FISA Info &amp; Réseaux</a></p></li><li class="type_category depth_4 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_367" data-node-key="367" data-node-type="10" aria-labelledby="random65d89ced1946413_label_4_12"><p class="tree_item branch" id="expandable_branch_10_367"><a tabindex="-1" id="random65d89ced1946413_label_4_12" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=367">2ème année FISE</a></p></li><li class="type_category depth_4 contains_branch" role="treeitem" aria-expanded="true" aria-owns="random65d89ced1946414_group" aria-labelledby="random65d89ced1946413_label_4_13"><p class="tree_item branch canexpand"><a tabindex="-1" id="random65d89ced1946413_label_4_13" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=209">2ème année FISA Info &amp; Réseaux</a></p><ul id="random65d89ced1946414_group" role="group"><li class="type_category depth_5 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_688" data-node-key="688" data-node-type="10" aria-labelledby="random65d89ced1946415_label_5_14"><p class="tree_item branch" id="expandable_branch_10_688"><a tabindex="-1" id="random65d89ced1946415_label_5_14" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=688">S7 - N7AN01 - UE Réseaux</a></p></li><li class="type_category depth_5 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_714" data-node-key="714" data-node-type="10" aria-labelledby="random65d89ced1946415_label_5_15"><p class="tree_item branch" id="expandable_branch_10_714"><a tabindex="-1" id="random65d89ced1946415_label_5_15" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=714">S7 - N7AN02 - Protocoles de l'Internet &amp; Résea...</a></p></li><li class="type_category depth_5 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_443" data-node-key="443" data-node-type="10" aria-labelledby="random65d89ced1946415_label_5_16"><p class="tree_item branch" id="expandable_branch_10_443"><a tabindex="-1" id="random65d89ced1946415_label_5_16" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=443">S7 - N7AN03 - UE Outils mathématiques pour l'ingén...</a></p></li><li class="type_category depth_5 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_689" data-node-key="689" data-node-type="10" aria-labelledby="random65d89ced1946415_label_5_17"><p class="tree_item branch" id="expandable_branch_10_689"><a tabindex="-1" id="random65d89ced1946415_label_5_17" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=689">S7 - N7AN04 - Systèmes concurrents et Applications...</a></p></li><li class="type_category depth_5 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_691" data-node-key="691" data-node-type="10" aria-labelledby="random65d89ced1946415_label_5_19"><p class="tree_item branch" id="expandable_branch_10_691"><a tabindex="-1" id="random65d89ced1946415_label_5_19" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=691">S8 - N8AN01 - Architecture des réseaux</a></p></li><li class="type_category depth_5 contains_branch" role="treeitem" aria-expanded="true" aria-owns="random65d89ced1946416_group" aria-labelledby="random65d89ced1946415_label_5_20"><p class="tree_item branch"><a tabindex="-1" id="random65d89ced1946415_label_5_20" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=692">S8 - N8AN02 - Méthodes formelles</a></p><ul id="random65d89ced1946416_group" role="group"><li class="type_course depth_6 item_with_icon" role="treeitem" aria-labelledby="random65d89ced1946417_label_6_21"><p class="tree_item hasicon"><a tabindex="-1" id="random65d89ced1946417_label_6_21" title="IDM" href="https://moodle-n7.inp-toulouse.fr/course/view.php?id=2022"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true"  ></i><span class="item-content-wrap">IDM</span></a></p></li><li class="type_course depth_6 item_with_icon" role="treeitem" aria-labelledby="random65d89ced1946417_label_6_22"><p class="tree_item hasicon"><a tabindex="-1" id="random65d89ced1946417_label_6_22" title="Systèmes de transition" href="https://moodle-n7.inp-toulouse.fr/course/view.php?id=1945"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true"  ></i><span class="item-content-wrap">Systèmes de transition</span></a></p></li><li class="type_course depth_6 item_with_icon current_branch" role="treeitem" aria-labelledby="random65d89ced1946417_label_6_23"><p class="tree_item hasicon active_tree_node"><a tabindex="-1" id="random65d89ced1946417_label_6_23" title="Programmation fonctionnelle" href="https://moodle-n7.inp-toulouse.fr/course/view.php?id=1943"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true"  ></i><span class="item-content-wrap">Programmation fonctionnelle</span></a></p></li><li class="type_course depth_6 item_with_icon" role="treeitem" aria-labelledby="random65d89ced1946417_label_6_24"><p class="tree_item hasicon"><a tabindex="-1" id="random65d89ced1946417_label_6_24" title="Traduction des langages" href="https://moodle-n7.inp-toulouse.fr/course/view.php?id=1188"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true"  ></i><span class="item-content-wrap">Traduction des langages</span></a></p></li></ul></li><li class="type_category depth_5 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_693" data-node-key="693" data-node-type="10" aria-labelledby="random65d89ced1946415_label_5_25"><p class="tree_item branch" id="expandable_branch_10_693"><a tabindex="-1" id="random65d89ced1946415_label_5_25" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=693">S8 - N8AN03 - Intergiciels et sécurité</a></p></li></ul></li><li class="type_category depth_4 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_817" data-node-key="817" data-node-type="10" aria-labelledby="random65d89ced1946413_label_4_26"><p class="tree_item branch" id="expandable_branch_10_817"><a tabindex="-1" id="random65d89ced1946413_label_4_26" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=817">1ère année FISA ModIA</a></p></li><li class="type_category depth_4 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_368" data-node-key="368" data-node-type="10" aria-labelledby="random65d89ced1946413_label_4_27"><p class="tree_item branch" id="expandable_branch_10_368"><a tabindex="-1" id="random65d89ced1946413_label_4_27" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=368">3ème année FISEA</a></p></li><li class="type_category depth_4 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_838" data-node-key="838" data-node-type="10" aria-labelledby="random65d89ced1946413_label_4_28"><p class="tree_item branch" id="expandable_branch_10_838"><a tabindex="-1" id="random65d89ced1946413_label_4_28" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=838">2ième Année FISA ModIA</a></p></li><li class="type_category depth_4 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_551" data-node-key="551" data-node-type="10" aria-labelledby="random65d89ced1946413_label_4_30"><p class="tree_item branch" id="expandable_branch_10_551"><a tabindex="-1" id="random65d89ced1946413_label_4_30" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=551">Suivi pédagogique</a></p></li><li class="type_category depth_4 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_869" data-node-key="869" data-node-type="10" aria-labelledby="random65d89ced1946413_label_4_31"><p class="tree_item branch" id="expandable_branch_10_869"><a tabindex="-1" id="random65d89ced1946413_label_4_31" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=869">Master SATCOM</a></p></li><li class="type_course depth_4 item_with_icon" role="treeitem" aria-labelledby="random65d89ced1946413_label_4_32"><p class="tree_item hasicon"><a tabindex="-1" id="random65d89ced1946413_label_4_32" title="Communication interne département SN" href="https://moodle-n7.inp-toulouse.fr/course/view.php?id=1995"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true"  ></i><span class="item-content-wrap">Communication interne département SN</span></a></p></li><li class="type_course depth_4 item_with_icon" role="treeitem" aria-labelledby="random65d89ced1946413_label_4_33"><p class="tree_item hasicon"><a tabindex="-1" id="random65d89ced1946413_label_4_33" title="Bac à Sable Moodle Dpt SN" href="https://moodle-n7.inp-toulouse.fr/course/view.php?id=3117"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true"  ></i><span class="item-content-wrap">Bac à Sable Moodle Dpt SN</span></a></p></li></ul></li><li class="type_category depth_3 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_372" data-node-key="372" data-node-type="10" aria-labelledby="random65d89ced1946411_label_3_34"><p class="tree_item branch" id="expandable_branch_10_372"><a tabindex="-1" id="random65d89ced1946411_label_3_34" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=372">Direction des études de l'N7</a></p></li><li class="type_category depth_3 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_398" data-node-key="398" data-node-type="10" aria-labelledby="random65d89ced1946411_label_3_35"><p class="tree_item branch" id="expandable_branch_10_398"><a tabindex="-1" id="random65d89ced1946411_label_3_35" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=398">Département Electronique, Energie Electrique et Au...</a></p></li><li class="type_category depth_3 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_5" data-node-key="5" data-node-type="10" aria-labelledby="random65d89ced1946411_label_3_36"><p class="tree_item branch" id="expandable_branch_10_5"><a tabindex="-1" id="random65d89ced1946411_label_3_36" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=5">Département Mécanique des Fluides, Énergétique et ...</a></p></li><li class="type_category depth_3 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_877" data-node-key="877" data-node-type="10" aria-labelledby="random65d89ced1946411_label_3_37"><p class="tree_item branch" id="expandable_branch_10_877"><a tabindex="-1" id="random65d89ced1946411_label_3_37" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=877">Soft Skills Center</a></p></li><li class="type_category depth_3 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_769" data-node-key="769" data-node-type="10" aria-labelledby="random65d89ced1946411_label_3_38"><p class="tree_item branch" id="expandable_branch_10_769"><a tabindex="-1" id="random65d89ced1946411_label_3_38" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=769">Transition Environnementale et le Développement Du...</a></p></li><li class="type_category depth_3 contains_branch" role="treeitem" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_10_37" data-node-key="37" data-node-type="10" aria-labelledby="random65d89ced1946411_label_3_40"><p class="tree_item branch" id="expandable_branch_10_37"><a tabindex="-1" id="random65d89ced1946411_label_3_40" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=37">Bac à sable </a></p></li></ul></li></ul></li></ul></div></section><span class="skip-block-to" id="sb-2"></span></aside>
+            </section>
+
+    </div>
+</div><header id="adaptable-page-header-wrapper">
+    <div id="header1" class="above-header">
+        <div class="container">
+            <nav class="navbar navbar-expand btco-hover-menu">
+                <button class="navbar-toggler nav-link aabtn d-block d-lg-none px-1 my-1 border-0" data-toggler="drawers" data-action="toggle" data-target="theme_adaptable-drawers-primary">
+                    <span aria-hidden="true" class="fa fa-bars"></span>
+                    <span class="sr-only">Panneau latéral</span>
+                </button>
+
+                <div class="collapse navbar-collapse">
+                <div class="my-auto m-1"></div>
+                    <ul class="navbar-nav ml-auto my-auto">
+
+                        <li class="nav-item navbarsearchsocial mx-md-1 my-auto d-md-block d-lg-none my-auto">
+                            <div id="searchinput-navbar-65d89ced209c165d89ced1946426" class="simplesearchform">
+    <div class="collapse" id="searchform-navbar">
+        <form autocomplete="off" action="https://moodle-n7.inp-toulouse.fr/course/search.php" method="get" accept-charset="utf-8" class="mform form-inline searchform-navbar">
+                <input type="hidden" name="context" value="70276">
+            <div class="input-group">
+                <label for="searchinput-65d89ced209c165d89ced1946426">
+                    <span class="sr-only">Recherche de cours</span>
+                </label>
+                    <input type="text"
+                       id="searchinput-65d89ced209c165d89ced1946426"
+                       class="form-control withclear"
+                       placeholder="Recherche de cours"
+                       aria-label="Recherche de cours"
+                       name="q"
+                       data-region="input"
+                       autocomplete="off"
+                    >
+                    <a class="btn btn-close"
+                        data-action="closesearch"
+                        data-toggle="collapse"
+                        href="#searchform-navbar"
+                        role="button"
+                    >
+                        <i class="icon fa fa-times fa-fw " aria-hidden="true"  ></i>
+                        <span class="sr-only">Fermer</span>
+                    </a>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-submit" data-action="submit">
+                        <i class="icon fa fa-search fa-fw " aria-hidden="true"  ></i>
+                        <span class="sr-only">Recherche de cours</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <a
+        class="btn btn-open rounded-0 nav-link"
+        data-toggle="collapse"
+        data-action="opensearch"
+        href="#searchform-navbar"
+        role="button"
+        aria-expanded="false"
+        aria-controls="searchform-navbar"
+        title="Activer/désactiver la saisie de recherche"
+    >
+        <i class="icon fa fa-search fa-fw " aria-hidden="true"  ></i>
+        <span class="sr-only">Activer/désactiver la saisie de recherche</span>
+    </a>
+</div>
+                        </li>
+
+
+                        <li class="nav-item dropdown ml-2 my-auto"><li class="nav-item dropdown my-auto"><a href="https://moodle-n7.inp-toulouse.fr/enrol/index.php?id=1943" class="nav-link dropdown-toggle my-auto" role="button" id="langmenu0" aria-haspopup="true" aria-expanded="false" aria-controls="dropdownlangmenu0" data-target="https://moodle-n7.inp-toulouse.fr/enrol/index.php?id=1943" data-toggle="dropdown" title="Langue"><i class="icon fa fa-globe fa-lg"></i><span class="langdesc">Français ‎(fr)‎</span></a><ul role="menu" class="dropdown-menu" id="dropdownlangmenu0" aria-labelledby="langmenu0"><li><a title="English ‎(en)‎" class="dropdown-item" href="https://moodle-n7.inp-toulouse.fr/enrol/index.php?id=1943&amp;lang=en">English ‎(en)‎</a></li><li><a title="Español - Internacional ‎(es)‎" class="dropdown-item" href="https://moodle-n7.inp-toulouse.fr/enrol/index.php?id=1943&amp;lang=es">Español - Internacional ‎(es)‎</a></li><li><a title="Français ‎(fr)‎" class="dropdown-item" href="https://moodle-n7.inp-toulouse.fr/enrol/index.php?id=1943&amp;lang=fr">Français ‎(fr)‎</a></li></ul></li></li>
+
+                        
+
+                        <li class="nav-item"><a class="btn-login d-inline-block" href="https://moodle-n7.inp-toulouse.fr/login/index.php">Connexion</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div id="page-header" class="container d-none d-lg-block">
+        <div class="row d-flex justify-content-start align-items-center h-100 ">
+            <div class="col-lg-8 p-0">
+                <div class="bd-highlight d-flex">
+                    <div class="pb-2 pr-3 pt-2 bd-highlight d-none d-lg-inline-block"><a href=https://moodle-n7.inp-toulouse.fr aria-label="Accueil" title="Moodle N7"><img src=//moodle-n7.inp-toulouse.fr/pluginfile.php/1/theme_adaptable/logo/1707383220/logoN7miniature.png id="logo" alt="Logo"></a></div>
+                    
+                </div>
+                <div id="course-header">
+                    
+                </div>
+            </div>
+            <div class="col-lg-4">
+                    <div class="headersearch pagelayoutoriginal d-none d-lg-inline-block">
+    <div id="searchinput-navbar-65d89ced20cd065d89ced1946427" class="simplesearchform">
+    <div class="collapse" id="searchform-navbar">
+        <form autocomplete="off" action="https://moodle-n7.inp-toulouse.fr/course/search.php" method="get" accept-charset="utf-8" class="mform form-inline searchform-navbar">
+                <input type="hidden" name="context" value="70276">
+            <div class="input-group">
+                <label for="searchinput-65d89ced20cd065d89ced1946427">
+                    <span class="sr-only">Recherche de cours</span>
+                </label>
+                    <input type="text"
+                       id="searchinput-65d89ced20cd065d89ced1946427"
+                       class="form-control withclear"
+                       placeholder="Recherche de cours"
+                       aria-label="Recherche de cours"
+                       name="q"
+                       data-region="input"
+                       autocomplete="off"
+                    >
+                    <a class="btn btn-close"
+                        data-action="closesearch"
+                        data-toggle="collapse"
+                        href="#searchform-navbar"
+                        role="button"
+                    >
+                        <i class="icon fa fa-times fa-fw " aria-hidden="true"  ></i>
+                        <span class="sr-only">Fermer</span>
+                    </a>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-submit" data-action="submit">
+                        <i class="icon fa fa-search fa-fw " aria-hidden="true"  ></i>
+                        <span class="sr-only">Recherche de cours</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <a
+        class="btn btn-open rounded-0 nav-link"
+        data-toggle="collapse"
+        data-action="opensearch"
+        href="#searchform-navbar"
+        role="button"
+        aria-expanded="false"
+        aria-controls="searchform-navbar"
+        title="Activer/désactiver la saisie de recherche"
+    >
+        <i class="icon fa fa-search fa-fw " aria-hidden="true"  ></i>
+        <span class="sr-only">Activer/désactiver la saisie de recherche</span>
+    </a>
+</div>
+</div>
+            </div>
+
+        </div>
+    </div>
+
+
+</header>
+
+
+<div  class="drawer drawer-left drawer-primary d-print-none not-initialized" data-region="fixed-drawer" id="theme_adaptable-drawers-primary" data-preference="" data-state="show-drawer-primary" data-forceopen="0" data-close-on-resize="1">
+    <div class="drawerheader">
+        <button
+            class="btn drawertoggle icon-no-margin hidden"
+            data-toggler="drawers"
+            data-action="closedrawer"
+            data-target="theme_adaptable-drawers-primary"
+            data-toggle="tooltip"
+            data-placement="right"
+            title="Fermer le tiroir"
+        >
+            <i class="icon fa fa-times fa-fw " aria-hidden="true"  ></i>
+        </button>
+    </div>
+    <div class="drawercontent drag-container" data-usertour="scroller">
+                <div class="list-group">
+        </div>
+
+    </div>
+</div><div id="page" class="drawers"><div class="drawer-toggles d-flex">
+</div><div class="drawer-toggles d-flex">
+    <div class="drawer-toggler drawer-left-toggle ml-auto d-print-none">
+        <button
+            class="btn icon-no-margin"
+            data-toggler="drawers"
+            data-action="toggle"
+            data-target="theme_adaptable-drawers-sidepost"
+            data-toggle="tooltip"
+            data-placement="left"
+            title="Ouvrir le tiroir des blocs"
+        >
+            <span class="sr-only">Ouvrir le tiroir des blocs</span>
+            <span class="dir-ltr-hide"><i class="icon fa fa-chevron-left fa-fw " aria-hidden="true"  ></i></span>
+            <span class="dir-rtl-hide"><i class="icon fa fa-chevron-right fa-fw " aria-hidden="true"  ></i></span>
+        </button>
+    </div>
+</div>
+<div id="maincontainer" class="container outercont">
+    <div class="row"><div id="page-second-header" class="col-12 pt-3 pb-3 d-none d-md-flex">
+    <div class="d-flex flex-fill flex-wrap align-items-center">
+        <div id="page-navbar" class="mr-auto">
+            <nav role="navigation" aria-label="Fil d’ariane">
+            <ol  class="breadcrumb d-none d-md-flex"><li><a href="https://moodle-n7.inp-toulouse.fr/"><i title="Accueil" class="fa fa-home fa-lg"></i></a></li><span class="separator"><i class="fa-angle-right fa"></i></span><li><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="https://moodle-n7.inp-toulouse.fr/course/index.php"><span itemprop="title">Cours</span></a></span></li><span class="separator"><i class="fa-angle-right fa"></i></span><li><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=365"><span itemprop="title">Département Sciences du Numérique (SN)</span></a></span></li><span class="separator"><i class="fa-angle-right fa"></i></span><li><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=209"><span itemprop="title">2ème année FISA Info &amp; Réseaux</span></a></span></li><span class="separator"><i class="fa-angle-right fa"></i></span><li><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="https://moodle-n7.inp-toulouse.fr/course/index.php?categoryid=692"><span itemprop="title">S8 - N8AN02 - Méthodes formelles</span></a></span></li><span class="separator"><i class="fa-angle-right fa"></i></span><li><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" title="Programmation fonctionnelle" href="https://moodle-n7.inp-toulouse.fr/course/view.php?id=1943"><span itemprop="title">Programmation fonctionnelle</span></a></span></li><span class="separator"><i class="fa-angle-right fa"></i></span><li><span tabindex="0">Options d’inscription</span></li></ol>
+        </nav>
+        </div>
+    </div>
+</div></div>    <div id="page-content" class="row">
+        <div id="region-main-box" class="col-12">
+            <section id="region-main">
+                <span class="notifications" id="user-notifications"></span><div role="main"><span id="maincontent"></span><h2>Options d’inscription</h2><div class="box generalbox info"><div class="coursebox clearfix" data-courseid="1943" data-type="1"><div class="info"><h3 class="coursename"><a class="aalink" href="https://moodle-n7.inp-toulouse.fr/course/view.php?id=1943">Programmation fonctionnelle</a></h3><div class="moreinfo"></div></div><div class="content"><div class="d-flex"><div class="flex-grow-1"></div></div></div></div></div><div class="box generalbox">
+<form autocomplete="off" action="https://moodle-n7.inp-toulouse.fr/login/index.php" method="post" accept-charset="utf-8" id="mform1_0vzg00bEXcxTrYt" class="mform">
+	<div style="display: none;"><input name="sesskey" type="hidden" value="lHnWY5J29I" />
+<input name="_qf__enrol_self_empty_form" type="hidden" value="1" />
+<input name="mform_isexpanded_id_selfheader" type="hidden" value="1" />
+</div>
+
+
+	<fieldset class="clearfix collapsible"  id="id_selfheader"><legend class="sr-only">Auto-inscription (Étudiant)</legend>
+<div class="d-flex align-items-center mb-2">
+    <div class="position-relative d-flex ftoggler align-items-center position-relative mr-1">
+            <a data-toggle="collapse"
+               href="#id_selfheadercontainer"
+               role="button"
+               aria-expanded="true"
+               aria-controls="id_selfheadercontainer"
+               class="btn btn-icon mr-1 icons-collapse-expand stretched-link fheader "
+            >
+                <span class="expanded-icon icon-no-margin p-2" title="Replier">
+                    <i class="icon fa fa-chevron-down fa-fw " aria-hidden="true"  ></i>
+                </span>
+                <span class="collapsed-icon icon-no-margin p-2" title="Déplier">
+                    <span class="dir-rtl-hide"><i class="icon fa fa-chevron-right fa-fw " aria-hidden="true"  ></i></span>
+                    <span class="dir-ltr-hide"><i class="icon fa fa-chevron-left fa-fw " aria-hidden="true"  ></i></span>
+                </span>
+                <span class="sr-only">Auto-inscription (Étudiant)</span>
+            </a>
+        <h3 class="d-flex align-self-stretch align-items-center mb-0" aria-hidden="true">
+            Auto-inscription (Étudiant)
+        </h3>
+    </div>
+    
+</div>
+<div id="id_selfheadercontainer" class="fcontainer collapseable collapse  show"><div id="fitem_id_info" class="form-group row  fitem femptylabel  " >
+    <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+        
+        <div class="form-label-addon d-flex align-items-center align-self-start">
+            
+        </div>
+    </div>
+    <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="static">
+        <div class="form-control-static">
+        Les visiteurs anonymes ne peuvent pas accéder à ce cours. Veuillez vous connecter.<div class="continuebutton">
+    <form method="get" action="https://moodle-n7.inp-toulouse.fr/login/index.php" >
+        <button type="submit" class="btn btn-primary"
+            id="single_button65d89ced194641"
+            
+            
+            >Continuer</button>
+    </form>
+</div>
+        </div>
+        <div class="form-control-feedback invalid-feedback" id="id_error_info" >
+            
+        </div>
+    </div>
+</div>
+		</div></fieldset>
+</form></div></div>            </section>
+        </div>
+    </div>
+</div>
+
+
+<footer id="page-footer" class="d-none d-lg-block">
+
+<div id="course-footer"></div>    <div class="info container2 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="tool_usertours-resettourcontainer"></div>
+                <div class="col-md-4 my-md-0 my-2 helplink"></div>                <div class="col-md-4 my-md-0 my-2">
+                    <div class="tool_dataprivacy"><a href="https://moodle-n7.inp-toulouse.fr/admin/tool/dataprivacy/summary.php">Résumé de conservation de données</a></div><div class="policiesfooter"><a href="https://moodle-n7.inp-toulouse.fr/admin/tool/policy/viewall.php?returnurl=https%3A%2F%2Fmoodle-n7.inp-toulouse.fr%2Fenrol%2Findex.php%3Fid%3D1943">Politiques</a></div>                </div>
+            </div>
+            <div class="row"><div class="col-12 my-md-0 my-2"></div>        </div>
+    </div>
+</footer>
+
+<div id="back-to-top"><i class="fa fa-angle-up "></i></div>
+
+</div></div><script>
+//<![CDATA[
+var require = {
+    baseUrl : 'https://moodle-n7.inp-toulouse.fr/lib/requirejs.php/1707383220/',
+    // We only support AMD modules with an explicit define() statement.
+    enforceDefine: true,
+    skipDataMain: true,
+    waitSeconds : 0,
+
+    paths: {
+        jquery: 'https://moodle-n7.inp-toulouse.fr/lib/javascript.php/1707383220/lib/jquery/jquery-3.6.1.min',
+        jqueryui: 'https://moodle-n7.inp-toulouse.fr/lib/javascript.php/1707383220/lib/jquery/ui-1.13.2/jquery-ui.min',
+        jqueryprivate: 'https://moodle-n7.inp-toulouse.fr/lib/javascript.php/1707383220/lib/requirejs/jquery-private'
+    },
+
+    // Custom jquery config map.
+    map: {
+      // '*' means all modules will get 'jqueryprivate'
+      // for their 'jquery' dependency.
+      '*': { jquery: 'jqueryprivate' },
+      // Stub module for 'process'. This is a workaround for a bug in MathJax (see MDL-60458).
+      '*': { process: 'core/first' },
+
+      // 'jquery-private' wants the real jQuery module
+      // though. If this line was not here, there would
+      // be an unresolvable cyclic dependency.
+      jqueryprivate: { jquery: 'jquery' }
+    }
+};
+
+//]]>
+</script>
+<script src="https://moodle-n7.inp-toulouse.fr/lib/javascript.php/1707383220/lib/requirejs/require.min.js"></script>
+<script>
+//<![CDATA[
+M.util.js_pending("core/first");
+require(['core/first'], function() {
+require(['core/prefetch'])
+;
+require(["media_videojs/loader"], function(loader) {
+    loader.setUp('fr');
+});;
+M.util.js_pending('core_form/changechecker'); require(['core_form/changechecker'], function(amd) {amd.watchFormById("mform1_0vzg00bEXcxTrYt"); M.util.js_complete('core_form/changechecker');});;
+
+require(['theme_boost/form-display-errors'], function(module) {
+    module.enhance("id_info");
+});
+;
+M.util.js_pending('theme_adaptable/adaptable'); require(['theme_adaptable/adaptable'], function(amd) {amd.init(); M.util.js_complete('theme_adaptable/adaptable');});;
+M.util.js_pending('theme_adaptable/bsoptions'); require(['theme_adaptable/bsoptions'], function(amd) {amd.init({"stickynavbar":true}); M.util.js_complete('theme_adaptable/bsoptions');});;
+M.util.js_pending('block_settings/settingsblock'); require(['block_settings/settingsblock'], function(amd) {amd.init("10940", null); M.util.js_complete('block_settings/settingsblock');});;
+M.util.js_pending('block_navigation/navblock'); require(['block_navigation/navblock'], function(amd) {amd.init("10939"); M.util.js_complete('block_navigation/navblock');});;
+
+
+require(['jquery', 'tool_policy/jquery-eu-cookie-law-popup', 'tool_policy/policyactions'], function($, Popup, ActionsMod) {
+        // Initialise the guest popup.
+        $(document).ready(function() {
+            // Only show message if there is some policy related to guests.
+                // Get localised messages.
+                var textmessage = "Si vous continuez à consulter ce site web, vous acceptez nos politiques :" +
+                   "<ul>" +
+                   "<li>" +
+                   "<a href=\"https://moodle-n7.inp-toulouse.fr/admin/tool/policy/view.php?versionid=1&amp;returnurl=https%3A%2F%2Fmoodle-n7.inp-toulouse.fr%2Fenrol%2Findex.php%3Fid%3D1943\" " +
+                   "   data-action=\"view-guest\" data-versionid=\"1\" data-behalfid=\"1\" >" +
+                   "Politique de protection des données du site de l'ENSEEIHT" +
+                   "</a>" +
+                   "</li>" +
+                   "" +
+                   "</ul>";
+                var continuemessage = "Continuer";
+
+                // Initialize popup.
+                $(document.body).addClass('eupopup');
+                if ($(".eupopup").length > 0) {
+                    $(document).euCookieLawPopup().init({
+                        popupPosition: 'bottom',
+                        popupTitle: '',
+                        popupText: textmessage,
+                        buttonContinueTitle: continuemessage,
+                        buttonLearnmoreTitle: '',
+                        compactStyle: true,
+                    });
+                }
+
+            // Initialise the JS for the modal window which displays the policy versions.
+            ActionsMod.init('[data-action="view-guest"]');
+        });
+});
+
+;
+
+require(['theme_boost/drawers']);
+;
+
+require(
+[
+    'jquery',
+],
+function(
+    $
+) {
+    var uniqid = "65d89ced209c165d89ced1946426";
+    var container = $('#searchinput-navbar-' + uniqid);
+    var opensearch = container.find('[data-action="opensearch"]');
+    var input = container.find('[data-region="input"]');
+    var submit = container.find('[data-action="submit"]');
+
+    submit.on('click', function(e) {
+        if (input.val() === '') {
+            e.preventDefault();
+        }
+    });
+    container.on('hidden.bs.collapse', function() {
+        opensearch.removeClass('d-none');
+        input.val('');
+    });
+    container.on('show.bs.collapse', function() {
+        opensearch.addClass('d-none');
+    });
+    container.on('shown.bs.collapse', function() {
+        input.focus();
+    });
+});
+;
+
+require(
+[
+    'jquery',
+],
+function(
+    $
+) {
+    var uniqid = "65d89ced20cd065d89ced1946427";
+    var container = $('#searchinput-navbar-' + uniqid);
+    var opensearch = container.find('[data-action="opensearch"]');
+    var input = container.find('[data-region="input"]');
+    var submit = container.find('[data-action="submit"]');
+
+    submit.on('click', function(e) {
+        if (input.val() === '') {
+            e.preventDefault();
+        }
+    });
+    container.on('hidden.bs.collapse', function() {
+        opensearch.removeClass('d-none');
+        input.val('');
+    });
+    container.on('show.bs.collapse', function() {
+        opensearch.addClass('d-none');
+    });
+    container.on('shown.bs.collapse', function() {
+        input.focus();
+    });
+});
+;
+
+require(['theme_boost/drawers']);
+;
+M.util.js_pending('core/notification'); require(['core/notification'], function(amd) {amd.init(70276, []); M.util.js_complete('core/notification');});;
+M.util.js_pending('core/log'); require(['core/log'], function(amd) {amd.setConfig({"level":"warn"}); M.util.js_complete('core/log');});;
+M.util.js_pending('core/page_global'); require(['core/page_global'], function(amd) {amd.init(); M.util.js_complete('core/page_global');});;
+M.util.js_pending('core/utility'); require(['core/utility'], function(amd) {M.util.js_complete('core/utility');});
+    M.util.js_complete("core/first");
+});
+//]]>
+</script>
+<script>
+//<![CDATA[
+M.str = {"moodle":{"lastmodified":"Modifi\u00e9 le","name":"Nom","error":"Erreur","info":"Information","yes":"Oui","no":"Non","viewallcourses":"Afficher tous les cours","cancel":"Annuler","confirm":"Confirmer","areyousure":"Voulez-vous vraiment continuer\u00a0?","closebuttontitle":"Fermer","unknownerror":"Erreur inconnue","file":"Fichier","url":"URL","collapseall":"Tout replier","expandall":"Tout d\u00e9plier"},"repository":{"type":"Type","size":"Taille","invalidjson":"Cha\u00eene JSON non valide","nofilesattached":"Aucun fichier joint","filepicker":"S\u00e9lecteur de fichiers","logout":"D\u00e9connexion","nofilesavailable":"Aucun fichier disponible","norepositoriesavailable":"D\u00e9sol\u00e9, aucun de vos d\u00e9p\u00f4ts actuels ne peut retourner de fichiers dans le format requis.","fileexistsdialogheader":"Le fichier existe","fileexistsdialog_editor":"Un fichier de ce nom a d\u00e9j\u00e0 \u00e9t\u00e9 joint au texte que vous modifiez.","fileexistsdialog_filemanager":"Un fichier de ce nom a d\u00e9j\u00e0 \u00e9t\u00e9 joint","renameto":"Renommer \u00e0 \u00ab\u00a0{$a}\u00a0\u00bb","referencesexist":"Il y a {$a} liens qui pointent vers ce fichier","select":"S\u00e9lectionnez"},"admin":{"confirmdeletecomments":"Voulez-vous vraiment supprimer des commentaires\u00a0?","confirmation":"Confirmation"},"debug":{"debuginfo":"Info de d\u00e9bogage","line":"Ligne","stacktrace":"Trace de la pile"},"langconfig":{"labelsep":"&nbsp;"}};
+//]]>
+</script>
+<script>
+//<![CDATA[
+(function() {Y.use("moodle-filter_mathjaxloader-loader",function() {M.filter_mathjaxloader.configure({"mathjaxconfig":"MathJax.Hub.Config({\r\n    config: [\"Accessible.js\", \"Safe.js\"],\r\n    errorSettings: { message: [\"!\"] },\r\n    skipStartupTypeset: true,\r\n    messageStyle: \"none\",\r\n    CommonHTML: { linebreaks: { automatic: true } },\r\n    \"HTML-CSS\": { linebreaks: { automatic: true } },\r\n    SVG: { linebreaks: { automatic: true } }\r\n});\r\n","lang":"fr"});
+});
+Y.use("moodle-form-shortforms",function() {M.form.shortforms({"formid":"mform1_0vzg00bEXcxTrYt"});
+});
+M.util.help_popups.setup(Y);
+M.util.init_block_hider(Y, {"id":"inst10939","title":"Navigation","preference":"block10939hidden","tooltipVisible":"Cacher le bloc Navigation","tooltipHidden":"Montrer le bloc Navigation"});
+ M.util.js_pending('random65d89ced1946428'); Y.on('domready', function() { M.util.js_complete("init");  M.util.js_complete('random65d89ced1946428'); });
+})();
+//]]>
+</script>
+</body>
+</html>
+<script type="text/javascript">
+    M.util.js_pending('theme_boost/loader');
+    require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
+        Drawer.init();
+        M.util.js_complete('theme_boost/loader');
+    });
+</script>
