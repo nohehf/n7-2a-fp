@@ -1,4 +1,4 @@
-(* Exercice à rendre *)
+(* @nohehf Nohé Hinniger-Foray 2024-02-14 *)
 (*
    pgcd: int -> int -> int
    Calcule le pgcd de a et b

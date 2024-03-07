@@ -70,17 +70,21 @@ Paramètre : l1 et l2, les deux listes triées
 Résultat : une liste triée avec les éléments de l1 et l2
 *)
 
-(* let rec fusionne ordre l1 l2 = failwith "TO DO" *)
+let rec fusionne ordre l1 l2 = match (l1,l2) with
+  | ([],l) -> l
+  | (l,[]) -> l
+  | (h1::q1, h2::q2) -> if ordre h1 h2 then h1::(fusionne ordre q1 l2) else h2::(fusionne ordre l1 q2)
+
 
 (*TESTS*)
-(* let%test _ = fusionne (fun x y -> x<y) [1;2;4;5;6] [3;4] = [1;2;3;4;4;5;6]
+let%test _ = fusionne (fun x y -> x<y) [1;2;4;5;6] [3;4] = [1;2;3;4;4;5;6]
 let%test _ = fusionne (fun x y -> x<y) [1;2;4] [3;4] = [1;2;3;4;4]
 let%test _ = fusionne (fun x y -> x<y) [1;2;4] [3;4;8;9;10] = [1;2;3;4;4;8;9;10]
 let%test _ = fusionne (fun x y -> x<y) [] [] = []
 let%test _ = fusionne (fun x y -> x<y) [1] [] = [1]
 let%test _ = fusionne (fun x y -> x<y) [] [1] = [1]
 let%test _ = fusionne (fun x y -> x<y) [1] [2] = [1;2]
-let%test _ = fusionne (fun x y -> x>y) [1] [2] = [2;1] *)
+let%test _ = fusionne (fun x y -> x>y) [1] [2] = [2;1]
 
 
 (* CONTRAT
@@ -91,17 +95,20 @@ Paramètre : l, la liste à trier
 Résultat : une liste triée avec les éléments de l
 *)
 
-(* let rec tri_fusion ordre l =failwith "TO DO" *)
+let rec tri_fusion ordre l = match l with
+  | [] -> []
+  | [x] -> [x]
+  | _ -> let (l1,l2) = scinde l in fusionne ordre (tri_fusion ordre l1) (tri_fusion ordre l2)
 
 
 (* TESTS *)
-(* let%test _ = tri_fusion (fun x y -> x<y) [] =[]
+let%test _ = tri_fusion (fun x y -> x<y) [] =[]
 let%test _ = tri_fusion (fun x y -> x<y) [4;2;4;3;1] =[1;2;3;4;4]
-let%test _ = tri_fusion (fun x y -> x > y) [4;7;2;4;1;2;2;7]=[7;7;4;4;2;2;2;1] *)
+let%test _ = tri_fusion (fun x y -> x > y) [4;7;2;4;1;2;2;7]=[7;7;4;4;2;2;2;1]
 
 
 (*  Parsing du fichier *)
-(* open Lexing *)
+open Lexing
 
 (* Affiche un quadruplet composé 
 - du sexe des personnes ayant reçu ce prénom : 1 pour les hommes, 2 pour les femmes
@@ -109,25 +116,25 @@ let%test _ = tri_fusion (fun x y -> x > y) [4;7;2;4;1;2;2;7]=[7;7;4;4;2;2;2;1] *
 - de l'année
 - du nombre de fois où ce prénom a été donné cette année là
 *)
-(* let print_stat (sexe,nom,annee,nb) =
-  Printf.eprintf "%s,%s,%d,%d%!\n" (if (sexe=1) then "M" else "F") nom annee nb *)
+let print_stat (sexe,nom,annee,nb) =
+  Printf.eprintf "%s,%s,%d,%d%!\n" (if (sexe=1) then "M" else "F") nom annee nb
 
 (* Analyse le fichier nat2016.txt (stratistique des prénoms entre 1900 et 2016) 
  et construit une liste de quadruplet (sexe,prénom,année,nombre d'affectation)
 *)
-(* let listStat = 
+let listStat = 
   let input = open_in "/Users/nohehf/n7/2a/fp/tp2/nat2016.txt" in 
   let filebuf = Lexing.from_channel input in
   Parser.main Lexer.token filebuf
-   *)
+  
 
 (* Analyse le fichier nathomme2016.txt (stratistique des prénoms d'homme commençant par un A ou un B entre 1900 et 2016) 
  et construit une liste de quadruplets (sexe,prénom,année,nombre d'affectations)
 *)
-(* let listStatHomme = 
+let listStatHomme = 
   let input = open_in "/Users/nohehf/n7/2a/fp/tp2/nathomme2016.txt" in
   let filebuf = Lexing.from_channel input in
   Parser.main Lexer.token filebuf
-   *)
+
 
 (*  Les contrats et les tests des fonctions suivantes sont à écrire *)
