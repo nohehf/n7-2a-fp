@@ -95,6 +95,12 @@ let arbre_sujet3 =
 let%test _ = arbre_sujet2 = arbre_sujet
 let%test _ = arbre_sujet3 = arbre_sujet
 
+let rec retrait_arbre caracteres (Noeud(value, branches)) = match caracteres with 
+  | [] -> Noeud(false, branches)
+  | t::q -> match recherche t branches with 
+    | None -> Noeud(value, branches)
+    | Some(sub_arbre) -> Noeud(value, maj t (retrait_arbre q sub_arbre) branches)
+
 
 (* 
    'a arbre -> 'a list list   
@@ -103,3 +109,27 @@ let rec arbre_dico (Noeud(is_mot, branches)) = match branches with
    | [] -> if is_mot then [[]] else []
    | (value, arbre)::other_branches -> (List.map (fun mot -> value::mot) (arbre_dico arbre)) @ (arbre_dico (Noeud(is_mot, other_branches)))
 
+let is_terminal_empty (Noeud(is_mot, branches)) = (not(is_mot) && List.length branches = 0)
+
+(* 
+   Remove useless branches / nodes
+   useless nodes are nodes that are not terminal and have no children
+*)
+let rec normalise (Noeud(is_mot, branches)) = Noeud(is_mot, List.fold_right (fun (is_mot, arbre) lb -> if is_terminal_empty arbre then lb else (is_mot,normalise arbre)::lb) branches [])
+
+let arbre_test = List.fold_right ajout_arbre [['a';'b']; ['a';'c'];] (Noeud (false,[]))
+
+let%test _ = arbre_test = Noeud (false,[('a',
+  Noeud (false,
+   [('b', Noeud (true, []));
+    ('c', Noeud (true, []))]))])
+
+let arbre_test = retrait_arbre ['a';'c'] arbre_test
+
+let%test _ = arbre_test = Noeud (false,
+[('a',
+  Noeud (false,
+   [('b', Noeud (true, []));
+    ('c', Noeud (false, []))]))])
+
+let%test _ = normalise arbre_test = List.fold_right ajout_arbre [['a';'b'];] (Noeud (false,[]))

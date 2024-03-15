@@ -69,13 +69,7 @@ let%test _ = not (appartient ""  trie_sujet)
 (*                - un trie                                                   *)
 (*   résultat   : le trie avec le mot retiré                                  *)
 (******************************************************************************)
-let rec retrait_arbre caracteres (Noeud(value, branches)) = match caracteres with 
-  | [] -> Noeud(false, branches)
-  | t::q -> match recherche t branches with 
-    | None -> Noeud(value, branches)
-    | Some(sub_arbre) -> Noeud(value, maj t (retrait_arbre q sub_arbre) branches)
-
-let retrait mot (Trie(arbre, fd, fr)) = Trie(retrait_arbre (fd mot) arbre, fd, fr)
+let retrait mot (Trie(arbre, fd, fr)) = Trie(normalise (retrait_arbre (fd mot) arbre), fd, fr)
 
 let trie_retrait =
   List.fold_right ajout
@@ -105,4 +99,4 @@ let trie_dico (Trie(arbre, _, fr)) = List.map fr (arbre_dico arbre)
 (*                - un trie                                                   *)
 (*   résultat   : aucun                                                       *)
 (******************************************************************************)
-let affiche p trie = failwith "TO DO affiche"
+let affiche p trie = List.iter p (trie_dico trie)
