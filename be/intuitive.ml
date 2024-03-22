@@ -477,14 +477,19 @@ let%test _ = max_mots_code_identique dico_fr_stupide = 1155
 
 (* lister : dico -> string liste *)
 (* Créer la liste de tous les mots d'un dictionnaire *)
-let rec lister _ = assert false
+let rec lister (Noeud (words, childs)) =
+  words @ List.fold_right (fun (_, dict) acc -> lister dict @ acc) childs []
 
-(*
-let%test _ = (List.sort (String.compare) (lister a9_1)) = ["ame";"an";"ane";"au";"bof";"bu"]
-let%test _ = (List.sort (String.compare) (lister a9_2)) = ["ame";"an";"ane";"au";"bof";"bu"]
-let%test _ = (List.sort (String.compare) (lister a6)) = ["an";"ane";"au"]
-let%test _ = (List.sort (String.compare) (lister empty)) = []
-*)
+let%test _ =
+  List.sort String.compare (lister a9_1)
+  = [ "ame"; "an"; "ane"; "au"; "bof"; "bu" ]
+
+let%test _ =
+  List.sort String.compare (lister a9_2)
+  = [ "ame"; "an"; "ane"; "au"; "bof"; "bu" ]
+
+let%test _ = List.sort String.compare (lister a6) = [ "an"; "ane"; "au" ]
+let%test _ = List.sort String.compare (lister empty) = []
 
 (* prefix : dico -> int list -> string list *)
 (* Liste tous les mots dont le préfix est la liste de touche passée en paramètre *)
