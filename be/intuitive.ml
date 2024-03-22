@@ -7,14 +7,29 @@ open Chaines
 (* Encodage *)
 (************)
 
+let rec find_index p l =
+  match l with
+  | [] -> None
+  | t :: q -> (
+      if p t then Some 0
+      else match find_index p q with None -> None | Some i -> Some (i + 1))
+
 (* encoder_lettre : encode -> char -> int *)
 (* Encode une lettre, c'est à dire indique la touche qu'il faut appuyer pour saisir la lettre *)
 (* Le premier paramètre est la liste d'encodage (ie quelle touche correspond à quelles lettres) *)
 (* Le second paramètre est la lettre à encoder *)
 (* Renvoie la touche à utiliser si c'est une lettre minuscule , 0 pour les autres caractères *)
-let encoder_lettre = fun _ -> assert false
+let encoder_lettre map chr =
+  try
+    fst
+      (List.find
+         (fun (_, chars) ->
+           match find_index (fun c -> c = chr) chars with
+           | None -> false
+           | Some _ -> true)
+         map)
+  with _ -> 0
 
-(*
 let%test _ = encoder_lettre t9_map 'a' = 2
 let%test _ = encoder_lettre t9_map 'b' = 2
 let%test _ = encoder_lettre t9_map 'c' = 2
@@ -42,7 +57,6 @@ let%test _ = encoder_lettre t9_map 'x' = 9
 let%test _ = encoder_lettre t9_map 'y' = 9
 let%test _ = encoder_lettre t9_map 'z' = 9
 let%test _ = encoder_lettre t9_map '&' = 0
-
 let%test _ = encoder_lettre stupide_map 'a' = 2
 let%test _ = encoder_lettre stupide_map 'b' = 3
 let%test _ = encoder_lettre stupide_map 'c' = 3
@@ -70,8 +84,6 @@ let%test _ = encoder_lettre stupide_map 'x' = 3
 let%test _ = encoder_lettre stupide_map 'y' = 2
 let%test _ = encoder_lettre stupide_map 'z' = 3
 let%test _ = encoder_lettre stupide_map '&' = 0
-*)
-
 
 (* encoder_mot : encodage -> string -> int list *)
 (* Encode un mot, c'est à dire indique la suite de touche à appuyer pour saisir le mot *)
@@ -79,7 +91,7 @@ let%test _ = encoder_lettre stupide_map '&' = 0
 (* Le second paramètre est le mot à encoder *)
 (* Renvoie la liste des touches à composer *)
 
-let encoder_mot = fun _ -> assert false
+let encoder_mot _ = assert false
 
 (*
 let%test _ = encoder_mot t9_map "" = []
@@ -101,14 +113,13 @@ let%test _ = encoder_mot stupide_map "ocaml" = [2;3;2;3;3]
 (* Nécessite un dictionnaire car un même code est associé à plusieurs mots *)
 (***************************************************************************)
 
-
 (* Arbre stockant les mots d'un dictionnaire en les associant à une suite de touche *)
 (* Les branches de l'arbre ne sont pas forcément triées *)
 type dico = Noeud of (string list * (int * dico) list)
 
 (* empty : dico *)
 (* Dictionnaire vide *)
-let empty = fun _ -> assert false
+let empty _ = assert false
 
 (* ajouter : encodage -> dico -> string -> dico *)
 (* Ajoute un mot à un dictionnaire en respectant un encodage *)
@@ -116,7 +127,7 @@ let empty = fun _ -> assert false
 (* Le second paramètre est le dictionnaire dans lequel le mot doit être ajouté *)
 (* Le troisième paramètre est le mot à ajouter *)
 (* Renvoie le nouveau dictionnaire *)
-let ajouter = fun _ -> assert false
+let ajouter _ = assert false
 
 (* TESTS - ATTENTION les tests peuvent échouer car l'ordre des branches n'est pas fixé *)
 (*
@@ -224,14 +235,13 @@ let a9_2 = Noeud
 let%test _ = (a9_1 = ajouter t9_map a8 "bu" || a9_2 = ajouter t9_map a8 "bu")
 *)
 
-
 (* decoder_mot -> dico -> int list -> string *)
 (* Identifie l'ensemble des mots potentiellement saisis à partir d'une suite de touches  *)
 (* Le premier paramètre est le dictionnaire *)
 (* Le second paramètre est la liste des touches appuyées *)
 (* Renvoie le mot saisi *)
 
-let rec decoder_mot = fun _ -> assert false
+let rec decoder_mot _ = assert false
 
 (*
 
@@ -289,7 +299,7 @@ let%test _ = decoder_mot dico_fr_stupide [4;3;2] = []
 
 (* max_mots_code_identique : dico -> int *)
 (* Calcule le nombre maximum de mots associés à un même code dans un dictionnaire *)
-let max_mots_code_identique = fun _ -> assert false
+let max_mots_code_identique _ = assert false
 
 (*
 let%test _ = max_mots_code_identique a9_1 = 3
@@ -309,7 +319,7 @@ let%test _ = max_mots_code_identique dico_fr_stupide = 1155
 
 (* lister : dico -> string liste *)
 (* Créer la liste de tous les mots d'un dictionnaire *)
-let rec lister = fun _ -> assert false
+let rec lister _ = assert false
 
 (*
 let%test _ = (List.sort (String.compare) (lister a9_1)) = ["ame";"an";"ane";"au";"bof";"bu"]
@@ -320,7 +330,7 @@ let%test _ = (List.sort (String.compare) (lister empty)) = []
 
 (* prefix : dico -> int list -> string list *)
 (* Liste tous les mots dont le préfix est la liste de touche passée en paramètre *)
-let rec prefix = fun _ -> assert false
+let rec prefix _ = assert false
 
 (*
 let%test _ = (List.sort (String.compare) (prefix a9_1 [2])) = ["ame";"an";"ane";"au";"bof";"bu"]
