@@ -493,35 +493,164 @@ let%test _ = List.sort String.compare (lister empty) = []
 
 (* prefix : dico -> int list -> string list *)
 (* Liste tous les mots dont le préfix est la liste de touche passée en paramètre *)
-let rec prefix _ = assert false
+let rec prefix (Noeud (words, childs)) digits =
+  match digits with
+  | [] -> lister (Noeud (words, childs))
+  | d :: q -> (
+      match recherche d childs with None -> [] | Some dict -> prefix dict q)
 
-(*
-let%test _ = (List.sort (String.compare) (prefix a9_1 [2])) = ["ame";"an";"ane";"au";"bof";"bu"]
-let%test _ = (List.sort (String.compare) (prefix a9_1 [2;6])) = ["ame";"an";"ane";"bof"]
-let%test _ = (List.sort (String.compare) (prefix a9_1 [2;8])) = ["au";"bu"]
-let%test _ = (List.sort (String.compare) (prefix a9_1 [3;8])) = []
-let%test _ = (List.sort (String.compare) (prefix empty [3;8])) = []
+(* NOTE: j'ai ajouté en bas du fichier des tests et fonctions auxiliaires
+   finalement non utilisées mais intéréssantes je pense *)
 
-let%test _ = (List.sort (String.compare) (prefix dico_fr [9;2;3])) = ["wading"; "zad"]
-let%test _ = (List.sort (String.compare) (prefix dico_fr [2;6;6;5;6])) = 
-             ["bonjour"; "bookmaker"; "conjoint"; "conjointe"; "conjointement";
-              "conjoncteur"; "conjoncteurdisjoncteur"; "conjoncteursdisjoncteurs";
-              "conjonctif"; "conjonction"; "conjonctival"; "conjonctivaux"; "conjonctive";
-              "conjonctivite"; "conjoncture"; "conjoncturel"; "conjoncturelle";
-              "conjoncturiste"]
-let%test _ = (List.sort (String.compare) (prefix dico_fr [2;2;2;2;2])) =
-             ["abaca"; "accablant"; "accable"; "accablement"; "accabler"; "babacool";
-              "babbage"; "baccalaureat"; "baccara"; "baccarat"; "cacabant"; "cacabe";
-              "cacaber"]
-let%test _ = (List.sort (String.compare) (prefix dico_fr_stupide [2;2;2;2])) =
-             ["aieul"; "aieule"; "aieuls"; "aieux"; "ayeaye"; "ayyubides"; "eoue";
-              "ouaille"; "ouailles"; "ouais"; "ouaouaron"; "ouie"; "yaourt"; "yaourtiere";
-              "yeye"; "youyou"; "yoyo"]
-let%test _ = (List.sort (String.compare) (prefix dico_fr_stupide [3;3;3;3])) =
-             ["bcbg"; "brrr"; "chthonien"; "chthonienne"; "dvdrom"; "gprs"; "html"; "http";
-              "mrbm"; "msbs"; "ndlr"; "ntsc"; "pgcd"; "ppcm"; "pschent"; "schlague";
-              "schlamms"; "schlass"; "schlinguant"; "schlingue"; "schlinguer"; "schlittage";
-              "schlittant"; "schlitte"; "schlitter"; "schlitteur"; "schnaps"; "schnauzer";
-              "schnock"; "schnoque"; "schnorchel"; "schnorkel"; "schnouf"; "schnouff";
-              "schproum"; "sgbd"; "sgml"; "slbm"; "sprl"; "ssbs"; "tvhd"]
-*)
+let%test _ =
+  List.sort String.compare (prefix a9_1 [ 2 ])
+  = [ "ame"; "an"; "ane"; "au"; "bof"; "bu" ]
+
+let%test _ =
+  List.sort String.compare (prefix a9_1 [ 2; 6 ])
+  = [ "ame"; "an"; "ane"; "bof" ]
+
+let%test _ = List.sort String.compare (prefix a9_1 [ 2; 8 ]) = [ "au"; "bu" ]
+let%test _ = List.sort String.compare (prefix a9_1 [ 3; 8 ]) = []
+let%test _ = List.sort String.compare (prefix empty [ 3; 8 ]) = []
+
+let%test _ =
+  List.sort String.compare (prefix dico_fr [ 9; 2; 3 ]) = [ "wading"; "zad" ]
+
+let%test _ =
+  List.sort String.compare (prefix dico_fr [ 2; 6; 6; 5; 6 ])
+  = [
+      "bonjour";
+      "bookmaker";
+      "conjoint";
+      "conjointe";
+      "conjointement";
+      "conjoncteur";
+      "conjoncteurdisjoncteur";
+      "conjoncteursdisjoncteurs";
+      "conjonctif";
+      "conjonction";
+      "conjonctival";
+      "conjonctivaux";
+      "conjonctive";
+      "conjonctivite";
+      "conjoncture";
+      "conjoncturel";
+      "conjoncturelle";
+      "conjoncturiste";
+    ]
+
+let%test _ =
+  List.sort String.compare (prefix dico_fr [ 2; 2; 2; 2; 2 ])
+  = [
+      "abaca";
+      "accablant";
+      "accable";
+      "accablement";
+      "accabler";
+      "babacool";
+      "babbage";
+      "baccalaureat";
+      "baccara";
+      "baccarat";
+      "cacabant";
+      "cacabe";
+      "cacaber";
+    ]
+
+let%test _ =
+  List.sort String.compare (prefix dico_fr_stupide [ 2; 2; 2; 2 ])
+  = [
+      "aieul";
+      "aieule";
+      "aieuls";
+      "aieux";
+      "ayeaye";
+      "ayyubides";
+      "eoue";
+      "ouaille";
+      "ouailles";
+      "ouais";
+      "ouaouaron";
+      "ouie";
+      "yaourt";
+      "yaourtiere";
+      "yeye";
+      "youyou";
+      "yoyo";
+    ]
+
+let%test _ =
+  List.sort String.compare (prefix dico_fr_stupide [ 3; 3; 3; 3 ])
+  = [
+      "bcbg";
+      "brrr";
+      "chthonien";
+      "chthonienne";
+      "dvdrom";
+      "gprs";
+      "html";
+      "http";
+      "mrbm";
+      "msbs";
+      "ndlr";
+      "ntsc";
+      "pgcd";
+      "ppcm";
+      "pschent";
+      "schlague";
+      "schlamms";
+      "schlass";
+      "schlinguant";
+      "schlingue";
+      "schlinguer";
+      "schlittage";
+      "schlittant";
+      "schlitte";
+      "schlitter";
+      "schlitteur";
+      "schnaps";
+      "schnauzer";
+      "schnock";
+      "schnoque";
+      "schnorchel";
+      "schnorkel";
+      "schnouf";
+      "schnouff";
+      "schproum";
+      "sgbd";
+      "sgml";
+      "slbm";
+      "sprl";
+      "ssbs";
+      "tvhd";
+    ]
+
+(* Je suis au debut parti sur une approche de lister tout les mots et de matcher le prefix
+   Voici les fonctions auxiliaires finalement non utilisees *)
+let rec has_prefix_chr prefix word =
+  match prefix with
+  | [] -> true
+  | chrp :: qp -> (
+      match word with
+      | [] -> false
+      | chrw :: qw -> if chrp = chrw then has_prefix_chr qp qw else false)
+
+let has_prefix prefix word =
+  has_prefix_chr (decompose_chaine prefix) (decompose_chaine word)
+
+let%test _ = has_prefix "" "abc"
+let%test _ = has_prefix "a" "abc"
+let%test _ = has_prefix "ab" "abc"
+let%test _ = not (has_prefix "q" "abc")
+let%test _ = not (has_prefix "abcd" "abc")
+let%test _ = not (has_prefix "q" "")
+let some f l = List.length (List.filter f l) > 0
+
+(* let rec prefix dico digits =
+   let prefixes = decoder_mot dico digits in
+   let all_words = lister dico in
+   List.flatten
+     (List.map
+        (fun word -> List.filter (fun prefix -> has_prefix prefix word) prefixes)
+        all_words) *)
