@@ -376,16 +376,14 @@ let%test _ = decoder_mot empty [ 5; 4; 6 ] = []
 (* Tests combinés de empty, ajoute et decoder_mot *)
 (* Doivent passer, car ne dépendent pas de l'ordre dans les listes *)
 
-(*
-let creer_dico encodage file = 
+let creer_dico encodage file =
   let channel = open_in file in
   try
     let rec read_lines acc =
       try
         let line = input_line channel in
         read_lines (ajouter encodage acc line)
-      with End_of_file ->
-        acc
+      with End_of_file -> acc
     in
     let lines = read_lines empty in
     close_in channel;
@@ -396,23 +394,61 @@ let creer_dico encodage file =
 
 let dico_fr = creer_dico t9_map "dico_fr.txt"
 let dico_fr_stupide = creer_dico stupide_map "dico_fr.txt"
+let%test _ = decoder_mot dico_fr [ 2; 6; 6; 5; 6; 8; 7 ] = [ "bonjour" ]
 
-let%test _ = decoder_mot dico_fr [2;6;6;5;6;8;7] = ["bonjour"]
-let%test _ = decoder_mot dico_fr [8;3;6;3;7;3] = ["venere"; "vendre"; "tendre"]
-let%test _ = decoder_mot dico_fr [2;6;3] = ["cod"; "cnd"; "bof"; "aof"; "ane"; "ame"]
-let%test _ = decoder_mot dico_fr [8;3;7;3;6;3] = []
-let%test _ = decoder_mot dico_fr [2;8;7;3;5;4;3] = ["aurelie"]
+let%test _ =
+  decoder_mot dico_fr [ 8; 3; 6; 3; 7; 3 ] = [ "venere"; "vendre"; "tendre" ]
 
-let%test _ = decoder_mot dico_fr_stupide [2;2;2] = ["yue"; "oui"; "oie"; "eau"; "eao"; "aie"]
-let%test _ = decoder_mot dico_fr_stupide [3;3;3;3] = 
-             ["tvhd"; "ssbs"; "sprl"; "slbm"; "sgml"; "sgbd"; "ppcm"; "pgcd"; "ntsc";
-              "ndlr"; "msbs"; "mrbm"; "http"; "html"; "gprs"; "brrr"; "bcbg"]
-let%test _ = decoder_mot dico_fr_stupide [3;2;3;2;3;2;3;2;3;2;3;2;3;2] = 
-             ["toxicomanogene"; "seropositivite"; "recapitulative"; "monocotyledone";
-              "hypovitaminose"; "hyperemotivite"; "heterometabole"; "desiderabilite"]
-let%test _ = decoder_mot dico_fr_stupide [2;3;2;3;2;3;2;3;2;3;2;3;2;3;2] = ["aluminosilicate"; "adiposogenitale"]
-let%test _ = decoder_mot dico_fr_stupide [4;3;2] = []
-*)
+let%test _ =
+  decoder_mot dico_fr [ 2; 6; 3 ] = [ "cod"; "cnd"; "bof"; "aof"; "ane"; "ame" ]
+
+let%test _ = decoder_mot dico_fr [ 8; 3; 7; 3; 6; 3 ] = []
+let%test _ = decoder_mot dico_fr [ 2; 8; 7; 3; 5; 4; 3 ] = [ "aurelie" ]
+
+let%test _ =
+  decoder_mot dico_fr_stupide [ 2; 2; 2 ]
+  = [ "yue"; "oui"; "oie"; "eau"; "eao"; "aie" ]
+
+let%test _ =
+  decoder_mot dico_fr_stupide [ 3; 3; 3; 3 ]
+  = [
+      "tvhd";
+      "ssbs";
+      "sprl";
+      "slbm";
+      "sgml";
+      "sgbd";
+      "ppcm";
+      "pgcd";
+      "ntsc";
+      "ndlr";
+      "msbs";
+      "mrbm";
+      "http";
+      "html";
+      "gprs";
+      "brrr";
+      "bcbg";
+    ]
+
+let%test _ =
+  decoder_mot dico_fr_stupide [ 3; 2; 3; 2; 3; 2; 3; 2; 3; 2; 3; 2; 3; 2 ]
+  = [
+      "toxicomanogene";
+      "seropositivite";
+      "recapitulative";
+      "monocotyledone";
+      "hypovitaminose";
+      "hyperemotivite";
+      "heterometabole";
+      "desiderabilite";
+    ]
+
+let%test _ =
+  decoder_mot dico_fr_stupide [ 2; 3; 2; 3; 2; 3; 2; 3; 2; 3; 2; 3; 2; 3; 2 ]
+  = [ "aluminosilicate"; "adiposogenitale" ]
+
+let%test _ = decoder_mot dico_fr_stupide [ 4; 3; 2 ] = []
 
 (* max_mots_code_identique : dico -> int *)
 (* Calcule le nombre maximum de mots associés à un même code dans un dictionnaire *)
