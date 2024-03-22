@@ -111,10 +111,6 @@ let rec arbre_dico (Noeud(is_mot, branches)) = match branches with
 
 let is_terminal_empty (Noeud(is_mot, branches)) = (not(is_mot) && List.length branches = 0)
 
-(* 
-   Remove useless branches / nodes
-   useless nodes are nodes that are not terminal and have no children
-*)
 let rec normalise (Noeud(is_mot, branches)) = Noeud(is_mot, List.fold_right (fun (is_mot, arbre) lb -> if is_terminal_empty arbre then lb else (is_mot,normalise arbre)::lb) branches [])
 
 let arbre_test = List.fold_right ajout_arbre [['a';'b']; ['a';'c'];] (Noeud (false,[]))
