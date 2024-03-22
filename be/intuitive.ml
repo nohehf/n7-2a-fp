@@ -124,7 +124,32 @@ type dico = Noeud of (string list * (int * dico) list)
 
 (* empty : dico *)
 (* Dictionnaire vide *)
-let empty _ = assert false
+let empty = Noeud ([], [])
+
+(* TP4 *)
+let rec recherche c lb =
+  match lb with
+  | [] -> None
+  | (tc, ta) :: qlb ->
+      if c < tc then None else if c = tc then Some ta else recherche c qlb
+
+let rec maj c nouvelle_b lb =
+  match lb with
+  | [] -> [ (c, nouvelle_b) ]
+  | (tc, ta) :: qlb ->
+      if c < tc then (c, nouvelle_b) :: lb
+      else if c = tc then (c, nouvelle_b) :: qlb
+      else (tc, ta) :: maj c nouvelle_b qlb
+
+let rec ajouter_digits (Noeud (words, childs)) word digits =
+  match digits with
+  | [] -> Noeud (word :: words, childs)
+  | d :: q ->
+      let dico_d =
+        let l = recherche d childs in
+        match l with None -> Noeud ([], []) | Some dd -> dd
+      in
+      Noeud (words, maj d (ajouter_digits dico_d word q) childs)
 
 (* ajouter : encodage -> dico -> string -> dico *)
 (* Ajoute un mot à un dictionnaire en respectant un encodage *)
@@ -132,113 +157,190 @@ let empty _ = assert false
 (* Le second paramètre est le dictionnaire dans lequel le mot doit être ajouté *)
 (* Le troisième paramètre est le mot à ajouter *)
 (* Renvoie le nouveau dictionnaire *)
-let ajouter _ = assert false
+let ajouter map dico word = ajouter_digits dico word (encoder_mot map word)
 
 (* TESTS - ATTENTION les tests peuvent échouer car l'ordre des branches n'est pas fixé *)
-(*
-let a1 = Noeud
-    ([],
-     [(2,
-       Noeud
-         ([],
-          [(6,
-            Noeud
-              ([],
-               [(6,
-                 Noeud
-                   ([],
-                    [(5,
-                      Noeud
-                        ([],
-                         [(6,
-                           Noeud
-                             ([], [(8, Noeud ([], [(7, Noeud (["bonjour"], []))]))]))]))]))]))]))])
+
+let a1 =
+  Noeud
+    ( [],
+      [
+        ( 2,
+          Noeud
+            ( [],
+              [
+                ( 6,
+                  Noeud
+                    ( [],
+                      [
+                        ( 6,
+                          Noeud
+                            ( [],
+                              [
+                                ( 5,
+                                  Noeud
+                                    ( [],
+                                      [
+                                        ( 6,
+                                          Noeud
+                                            ( [],
+                                              [
+                                                ( 8,
+                                                  Noeud
+                                                    ( [],
+                                                      [
+                                                        ( 7,
+                                                          Noeud
+                                                            ([ "bonjour" ], [])
+                                                        );
+                                                      ] ) );
+                                              ] ) );
+                                      ] ) );
+                              ] ) );
+                      ] ) );
+              ] ) );
+      ] )
+
 let%test _ = a1 = ajouter t9_map empty "bonjour"
 
-let a2 = Noeud
-    ([],
-     [(6,
-       Noeud
-         ([],
-          [(2,
-            Noeud
-              ([],
-               [(2, Noeud ([], [(6, Noeud ([], [(5, Noeud (["ocaml"], []))]))]))]))]))])
+let a2 =
+  Noeud
+    ( [],
+      [
+        ( 6,
+          Noeud
+            ( [],
+              [
+                ( 2,
+                  Noeud
+                    ( [],
+                      [
+                        ( 2,
+                          Noeud
+                            ( [],
+                              [
+                                (6, Noeud ([], [ (5, Noeud ([ "ocaml" ], [])) ]));
+                              ] ) );
+                      ] ) );
+              ] ) );
+      ] )
 
 let%test _ = a2 = ajouter t9_map empty "ocaml"
 
-let a3 =   Noeud
-    ([],
-     [(2, Noeud (["a"], []));
-      (6,
-       Noeud
-         ([],
-          [(2,
-            Noeud
-              ([],
-               [(2, Noeud ([], [(6, Noeud ([], [(5, Noeud (["ocaml"], []))]))]))]))]))])
+let a3 =
+  Noeud
+    ( [],
+      [
+        (2, Noeud ([ "a" ], []));
+        ( 6,
+          Noeud
+            ( [],
+              [
+                ( 2,
+                  Noeud
+                    ( [],
+                      [
+                        ( 2,
+                          Noeud
+                            ( [],
+                              [
+                                (6, Noeud ([], [ (5, Noeud ([ "ocaml" ], [])) ]));
+                              ] ) );
+                      ] ) );
+              ] ) );
+      ] )
 
 let%test _ = a3 = ajouter t9_map a2 "a"
+let a4 = Noeud ([], [ (2, Noeud ([], [ (8, Noeud ([ "au" ], [])) ])) ])
+let%test _ = a4 = ajouter t9_map empty "au"
 
-let a4 = Noeud ([], [(2, Noeud ([], [(8, Noeud (["au"], []))]))])
-
-let%test _ = a4 = ajouter t9_map empty "au" 
-
-let a5 = Noeud
-    ([], [(2, Noeud ([], [(6, Noeud (["an"], [])); (8, Noeud (["au"], []))]))])
+let a5 =
+  Noeud
+    ( [],
+      [
+        (2, Noeud ([], [ (6, Noeud ([ "an" ], [])); (8, Noeud ([ "au" ], [])) ]));
+      ] )
 
 let%test _ = a5 = ajouter t9_map a4 "an"
 
-let a6 = Noeud
-    ([],
-     [(2,
-       Noeud
-         ([],
-          [(6, Noeud (["an"], [(3, Noeud (["ane"], []))]));
-           (8, Noeud (["au"], []))]))])
+let a6 =
+  Noeud
+    ( [],
+      [
+        ( 2,
+          Noeud
+            ( [],
+              [
+                (6, Noeud ([ "an" ], [ (3, Noeud ([ "ane" ], [])) ]));
+                (8, Noeud ([ "au" ], []));
+              ] ) );
+      ] )
 
 let%test _ = a6 = ajouter t9_map a5 "ane"
 
-let a7 = Noeud
-    ([],
-     [(2,
-       Noeud
-         ([],
-          [(6, Noeud (["an"], [(3, Noeud (["ame";"ane"], []))]));
-           (8, Noeud (["au"], []))]))])
-
+let a7 =
+  Noeud
+    ( [],
+      [
+        ( 2,
+          Noeud
+            ( [],
+              [
+                (6, Noeud ([ "an" ], [ (3, Noeud ([ "ame"; "ane" ], [])) ]));
+                (8, Noeud ([ "au" ], []));
+              ] ) );
+      ] )
 
 let%test _ = a7 = ajouter t9_map a6 "ame"
 
-
-let a8 = Noeud
-    ([],
-     [(2,
-       Noeud
-         ([],
-          [(6, Noeud (["an"], [(3, Noeud (["bof";"ame";"ane"], []))]));
-           (8, Noeud (["au"], []))]))])
-
+let a8 =
+  Noeud
+    ( [],
+      [
+        ( 2,
+          Noeud
+            ( [],
+              [
+                ( 6,
+                  Noeud ([ "an" ], [ (3, Noeud ([ "bof"; "ame"; "ane" ], [])) ])
+                );
+                (8, Noeud ([ "au" ], []));
+              ] ) );
+      ] )
 
 let%test _ = a8 = ajouter t9_map a7 "bof"
-let a9_1 = Noeud
-    ([],
-     [(2,
-       Noeud
-         ([],
-          [(6, Noeud (["an"], [(3, Noeud (["bof";"ame";"ane"], []))]));
-           (8, Noeud (["bu";"au"], []))]))])
-let a9_2 = Noeud
-    ([],
-     [(2,
-       Noeud
-         ([],
-          [(8, Noeud (["bu"; "au"], []));
-           (6, Noeud (["an"], [(3, Noeud (["bof"; "ame"; "ane"], []))]))]))])
 
+let a9_1 =
+  Noeud
+    ( [],
+      [
+        ( 2,
+          Noeud
+            ( [],
+              [
+                ( 6,
+                  Noeud ([ "an" ], [ (3, Noeud ([ "bof"; "ame"; "ane" ], [])) ])
+                );
+                (8, Noeud ([ "bu"; "au" ], []));
+              ] ) );
+      ] )
 
-let%test _ = (a9_1 = ajouter t9_map a8 "bu" || a9_2 = ajouter t9_map a8 "bu")
-*)
+let a9_2 =
+  Noeud
+    ( [],
+      [
+        ( 2,
+          Noeud
+            ( [],
+              [
+                (8, Noeud ([ "bu"; "au" ], []));
+                ( 6,
+                  Noeud ([ "an" ], [ (3, Noeud ([ "bof"; "ame"; "ane" ], [])) ])
+                );
+              ] ) );
+      ] )
+
+let%test _ = a9_1 = ajouter t9_map a8 "bu" || a9_2 = ajouter t9_map a8 "bu"
 
 (* decoder_mot -> dico -> int list -> string *)
 (* Identifie l'ensemble des mots potentiellement saisis à partir d'une suite de touches  *)
