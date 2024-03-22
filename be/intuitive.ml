@@ -130,8 +130,7 @@ let empty = Noeud ([], [])
 let rec recherche c lb =
   match lb with
   | [] -> None
-  | (tc, ta) :: qlb ->
-      if c < tc then None else if c = tc then Some ta else recherche c qlb
+  | (tc, ta) :: qlb -> if c = tc then Some ta else recherche c qlb
 
 let rec maj c nouvelle_b lb =
   match lb with
@@ -342,26 +341,37 @@ let a9_2 =
 
 let%test _ = a9_1 = ajouter t9_map a8 "bu" || a9_2 = ajouter t9_map a8 "bu"
 
-(* decoder_mot -> dico -> int list -> string *)
+(* decoder_mot -> dico -> int list -> string list *)
 (* Identifie l'ensemble des mots potentiellement saisis à partir d'une suite de touches  *)
 (* Le premier paramètre est le dictionnaire *)
 (* Le second paramètre est la liste des touches appuyées *)
 (* Renvoie le mot saisi *)
 
-let rec decoder_mot _ = assert false
+let rec get_dico (Noeud (words, childs)) digits =
+  match digits with
+  | [] -> Noeud (words, childs)
+  | d :: q -> (
+      match recherche d childs with
+      | None -> failwith ""
+      | Some dict -> get_dico dict q)
 
-(*
+let rec decoder_mot (Noeud (words, childs)) digits =
+  match digits with
+  | [] -> words
+  | d :: q -> (
+      match recherche d childs with
+      | None -> []
+      | Some dict -> decoder_mot dict q)
 
-let%test _ = decoder_mot a9_1 [2;8] = ["bu"; "au"]
-let%test _ = decoder_mot a9_1 [2;6] = ["an"]
-let%test _ = decoder_mot a9_1 [2;6;3] = ["bof"; "ame"; "ane"]
-let%test _ = decoder_mot a9_1 [1;4;5] = []
-let%test _ = decoder_mot a9_2 [2;8] = ["bu"; "au"]
-let%test _ = decoder_mot a9_2 [2;6] = ["an"]
-let%test _ = decoder_mot a9_2 [2;6;3] = ["bof"; "ame"; "ane"]
-let%test _ = decoder_mot a9_2 [1;4;5] = []
-let%test _ = decoder_mot empty [5;4;6] = []
-*)
+let%test _ = decoder_mot a9_1 [ 2; 8 ] = [ "bu"; "au" ]
+let%test _ = decoder_mot a9_1 [ 2; 6 ] = [ "an" ]
+let%test _ = decoder_mot a9_1 [ 2; 6; 3 ] = [ "bof"; "ame"; "ane" ]
+let%test _ = decoder_mot a9_1 [ 1; 4; 5 ] = []
+let%test _ = decoder_mot a9_2 [ 2; 8 ] = [ "bu"; "au" ]
+let%test _ = decoder_mot a9_2 [ 2; 6 ] = [ "an" ]
+let%test _ = decoder_mot a9_2 [ 2; 6; 3 ] = [ "bof"; "ame"; "ane" ]
+let%test _ = decoder_mot a9_2 [ 1; 4; 5 ] = []
+let%test _ = decoder_mot empty [ 5; 4; 6 ] = []
 
 (* Tests combinés de empty, ajoute et decoder_mot *)
 (* Doivent passer, car ne dépendent pas de l'ordre dans les listes *)
