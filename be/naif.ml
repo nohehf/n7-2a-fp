@@ -9,7 +9,7 @@ open Chaines
 (*************)
 
 exception NotALetter of char
-exception CodeInvalide of string
+exception CodeInvalide
 
 (************)
 (* Encodage *)
@@ -321,67 +321,89 @@ let%test _ =
 (* Le second paramètre est un couple (touche,  nombre de fois qu'elle a été appuyée) *)
 (* Renvoie la lettre associée *)
 (* Exception CodeInvalide si la combinaison ne correspond à aucune lettre *)
-let decoder_lettre _ = assert false
 
-(*
-let%test _ = decoder_lettre t9_map (2,1) = 'a'
-let%test _ = decoder_lettre t9_map (2,2) = 'b'
-let%test _ = decoder_lettre t9_map (2,3) = 'c'
-let%test _ = decoder_lettre t9_map (3,1) = 'd'
-let%test _ = decoder_lettre t9_map (3,2) = 'e'
-let%test _ = decoder_lettre t9_map (3,3) = 'f'
-let%test _ = decoder_lettre t9_map (4,1) = 'g'
-let%test _ = decoder_lettre t9_map (4,2) = 'h'
-let%test _ = decoder_lettre t9_map (4,3) = 'i'
-let%test _ = decoder_lettre t9_map (5,1) = 'j'
-let%test _ = decoder_lettre t9_map (5,2) = 'k'
-let%test _ = decoder_lettre t9_map (5,3) = 'l'
-let%test _ = decoder_lettre t9_map (6,1) = 'm'
-let%test _ = decoder_lettre t9_map (6,2) = 'n'
-let%test _ = decoder_lettre t9_map (6,3) = 'o'
-let%test _ = decoder_lettre t9_map (7,1) = 'p'
-let%test _ = decoder_lettre t9_map (7,2) = 'q'
-let%test _ = decoder_lettre t9_map (7,3) = 'r'
-let%test _ = decoder_lettre t9_map (7,4) = 's'
-let%test _ = decoder_lettre t9_map (8,1) = 't'
-let%test _ = decoder_lettre t9_map (8,2) = 'u'
-let%test _ = decoder_lettre t9_map (8,3) = 'v'
-let%test _ = decoder_lettre t9_map (9,1) = 'w'
-let%test _ = decoder_lettre t9_map (9,2) = 'x'
-let%test _ = decoder_lettre t9_map (9,3) = 'y'
-let%test _ = decoder_lettre t9_map (9,4) = 'z'
-let%test _ = try let _ = decoder_lettre t9_map (9,6) in false with CodeInvalide -> true
-let%test _ = try let _ = decoder_lettre t9_map (10,1) in false with CodeInvalide -> true
+(* TODO code invalide *)
+let decoder_lettre map (digit, times) =
+  try List.nth (snd (List.find (fun (d, _) -> d = digit) map)) (times - 1)
+  with _ -> raise CodeInvalide
 
-let%test _ = decoder_lettre stupide_map (2,1)= 'a'
-let%test _ = decoder_lettre stupide_map (3,1) = 'b'
-let%test _ = decoder_lettre stupide_map (3,2) = 'c'
-let%test _ = decoder_lettre stupide_map (3,3) = 'd'
-let%test _ = decoder_lettre stupide_map (2,2) = 'e'
-let%test _ = decoder_lettre stupide_map (3,4) = 'f'
-let%test _ = decoder_lettre stupide_map (3,5) = 'g'
-let%test _ = decoder_lettre stupide_map (3,6) = 'h'
-let%test _ = decoder_lettre stupide_map (2,3) = 'i'
-let%test _ = decoder_lettre stupide_map (3,7) = 'j'
-let%test _ = decoder_lettre stupide_map (3,8) = 'k'
-let%test _ = decoder_lettre stupide_map (3,9) = 'l'
-let%test _ = decoder_lettre stupide_map (3,10) = 'm'
-let%test _ = decoder_lettre stupide_map (3,11) = 'n'
-let%test _ = decoder_lettre stupide_map (2,4) = 'o'
-let%test _ = decoder_lettre stupide_map (3,12) = 'p'
-let%test _ = decoder_lettre stupide_map (3,13) ='q'
-let%test _ = decoder_lettre stupide_map (3,14) = 'r'
-let%test _ = decoder_lettre stupide_map (3,15) = 's'
-let%test _ = decoder_lettre stupide_map (3,16) = 't'
-let%test _ = decoder_lettre stupide_map (2,5) = 'u'
-let%test _ = decoder_lettre stupide_map (3,17) ='v'
-let%test _ = decoder_lettre stupide_map (3,18) = 'w'
-let%test _ = decoder_lettre stupide_map (3,19) = 'x'
-let%test _ = decoder_lettre stupide_map (2,6) = 'y'
-let%test _ = decoder_lettre stupide_map (3,20) = 'z'
-let%test _ = try let _ = decoder_lettre stupide_map (9,1) in false with CodeInvalide -> true
-let%test _ = try let _ = decoder_lettre stupide_map (4,3) in false with CodeInvalide -> true
-*)
+let%test _ = decoder_lettre t9_map (2, 1) = 'a'
+let%test _ = decoder_lettre t9_map (2, 2) = 'b'
+let%test _ = decoder_lettre t9_map (2, 3) = 'c'
+let%test _ = decoder_lettre t9_map (3, 1) = 'd'
+let%test _ = decoder_lettre t9_map (3, 2) = 'e'
+let%test _ = decoder_lettre t9_map (3, 3) = 'f'
+let%test _ = decoder_lettre t9_map (4, 1) = 'g'
+let%test _ = decoder_lettre t9_map (4, 2) = 'h'
+let%test _ = decoder_lettre t9_map (4, 3) = 'i'
+let%test _ = decoder_lettre t9_map (5, 1) = 'j'
+let%test _ = decoder_lettre t9_map (5, 2) = 'k'
+let%test _ = decoder_lettre t9_map (5, 3) = 'l'
+let%test _ = decoder_lettre t9_map (6, 1) = 'm'
+let%test _ = decoder_lettre t9_map (6, 2) = 'n'
+let%test _ = decoder_lettre t9_map (6, 3) = 'o'
+let%test _ = decoder_lettre t9_map (7, 1) = 'p'
+let%test _ = decoder_lettre t9_map (7, 2) = 'q'
+let%test _ = decoder_lettre t9_map (7, 3) = 'r'
+let%test _ = decoder_lettre t9_map (7, 4) = 's'
+let%test _ = decoder_lettre t9_map (8, 1) = 't'
+let%test _ = decoder_lettre t9_map (8, 2) = 'u'
+let%test _ = decoder_lettre t9_map (8, 3) = 'v'
+let%test _ = decoder_lettre t9_map (9, 1) = 'w'
+let%test _ = decoder_lettre t9_map (9, 2) = 'x'
+let%test _ = decoder_lettre t9_map (9, 3) = 'y'
+let%test _ = decoder_lettre t9_map (9, 4) = 'z'
+
+let%test _ =
+  try
+    let _ = decoder_lettre t9_map (9, 6) in
+    false
+  with CodeInvalide -> true
+
+let%test _ =
+  try
+    let _ = decoder_lettre t9_map (10, 1) in
+    false
+  with CodeInvalide -> true
+
+let%test _ = decoder_lettre stupide_map (2, 1) = 'a'
+let%test _ = decoder_lettre stupide_map (3, 1) = 'b'
+let%test _ = decoder_lettre stupide_map (3, 2) = 'c'
+let%test _ = decoder_lettre stupide_map (3, 3) = 'd'
+let%test _ = decoder_lettre stupide_map (2, 2) = 'e'
+let%test _ = decoder_lettre stupide_map (3, 4) = 'f'
+let%test _ = decoder_lettre stupide_map (3, 5) = 'g'
+let%test _ = decoder_lettre stupide_map (3, 6) = 'h'
+let%test _ = decoder_lettre stupide_map (2, 3) = 'i'
+let%test _ = decoder_lettre stupide_map (3, 7) = 'j'
+let%test _ = decoder_lettre stupide_map (3, 8) = 'k'
+let%test _ = decoder_lettre stupide_map (3, 9) = 'l'
+let%test _ = decoder_lettre stupide_map (3, 10) = 'm'
+let%test _ = decoder_lettre stupide_map (3, 11) = 'n'
+let%test _ = decoder_lettre stupide_map (2, 4) = 'o'
+let%test _ = decoder_lettre stupide_map (3, 12) = 'p'
+let%test _ = decoder_lettre stupide_map (3, 13) = 'q'
+let%test _ = decoder_lettre stupide_map (3, 14) = 'r'
+let%test _ = decoder_lettre stupide_map (3, 15) = 's'
+let%test _ = decoder_lettre stupide_map (3, 16) = 't'
+let%test _ = decoder_lettre stupide_map (2, 5) = 'u'
+let%test _ = decoder_lettre stupide_map (3, 17) = 'v'
+let%test _ = decoder_lettre stupide_map (3, 18) = 'w'
+let%test _ = decoder_lettre stupide_map (3, 19) = 'x'
+let%test _ = decoder_lettre stupide_map (2, 6) = 'y'
+let%test _ = decoder_lettre stupide_map (3, 20) = 'z'
+
+let%test _ =
+  try
+    let _ = decoder_lettre stupide_map (9, 1) in
+    false
+  with CodeInvalide -> true
+
+let%test _ =
+  try
+    let _ = decoder_lettre stupide_map (4, 3) in
+    false
+  with CodeInvalide -> true
 
 (* decoder_mot -> encodage -> int list -> string *)
 (* Identifie le mot saisi à partir d'une suite de touches  *)
