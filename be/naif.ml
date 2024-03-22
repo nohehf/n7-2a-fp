@@ -4,15 +4,12 @@ open Chaines
 (* Saisie des mots sans le mode T9 *)
 (* Pour marquer le passage d'un caractère à un autre, on utilise la touche 0 *)
 
-
-
 (*************)
 (* Exception *)
 (*************)
 
-exception NotALetter
-exception CodeInvalide
-
+exception NotALetter of char
+exception CodeInvalide of string
 
 (************)
 (* Encodage *)
@@ -26,15 +23,18 @@ exception CodeInvalide
 let rec find_index p l =
   match l with
   | [] -> None
-  | t::q -> if (p t) then Some 0 else 
-      match find_index p q with
-      | None -> None
-      | Some i -> Some (i+1)
+  | t :: q -> (
+      if p t then Some 0
+      else match find_index p q with None -> None | Some i -> Some (i + 1))
 
-let%test _ = find_index (fun i -> i mod 2 = 0) [1;3;4;5;6;7] = Some 2
-let%test _ = find_index (fun i -> i mod 2 = 0) [1;3;5;7] = None
-let%test _ = find_index (fun c -> c > 'd') ['a';'b';'c';'d';'e';'f';'g'] = Some 4
-let%test _ = find_index (fun c -> c > 'r') ['a';'b';'c';'d';'e';'f';'g'] = None
+let%test _ = find_index (fun i -> i mod 2 = 0) [ 1; 3; 4; 5; 6; 7 ] = Some 2
+let%test _ = find_index (fun i -> i mod 2 = 0) [ 1; 3; 5; 7 ] = None
+
+let%test _ =
+  find_index (fun c -> c > 'd') [ 'a'; 'b'; 'c'; 'd'; 'e'; 'f'; 'g' ] = Some 4
+
+let%test _ =
+  find_index (fun c -> c > 'r') [ 'a'; 'b'; 'c'; 'd'; 'e'; 'f'; 'g' ] = None
 
 (* encoder_lettre : encode -> char -> (int * int) *)
 (* Encode une lettre, c'est à dire indique la touche et le nombre de fois qu'il faut appuyer dessus pour saisir la lettre *)
@@ -42,69 +42,97 @@ let%test _ = find_index (fun c -> c > 'r') ['a';'b';'c';'d';'e';'f';'g'] = None
 (* Le second paramètre est la lettre à encoder *)
 (* Renvoie un couple (touche, nombre de fois où il faut utiliser cette touche) *)
 (* Exception si le caractère n'est pas une lettre minuscule *)
-let encoder_lettre = fun _ -> assert false
+(* let encoder_lettre map chr = find_index (fun (digit, chars) ->
+        (match find_index (fun c -> c = chr) chars with
+            | None -> -1
+            | Some(index) -> index
+        )
+        >= 0
+    ) map *)
 
 (*
-let%test _ = encoder_lettre t9_map 'a' = (2,1)
-let%test _ = encoder_lettre t9_map 'b' = (2,2)
-let%test _ = encoder_lettre t9_map 'c' = (2,3)
-let%test _ = encoder_lettre t9_map 'd' = (3,1)
-let%test _ = encoder_lettre t9_map 'e' = (3,2)
-let%test _ = encoder_lettre t9_map 'f' = (3,3)
-let%test _ = encoder_lettre t9_map 'g' = (4,1)
-let%test _ = encoder_lettre t9_map 'h' = (4,2)
-let%test _ = encoder_lettre t9_map 'i' = (4,3)
-let%test _ = encoder_lettre t9_map 'j' = (5,1)
-let%test _ = encoder_lettre t9_map 'k' = (5,2)
-let%test _ = encoder_lettre t9_map 'l' = (5,3)
-let%test _ = encoder_lettre t9_map 'm' = (6,1)
-let%test _ = encoder_lettre t9_map 'n' = (6,2)
-let%test _ = encoder_lettre t9_map 'o' = (6,3)
-let%test _ = encoder_lettre t9_map 'p' = (7,1)
-let%test _ = encoder_lettre t9_map 'q' = (7,2)
-let%test _ = encoder_lettre t9_map 'r' = (7,3)
-let%test _ = encoder_lettre t9_map 's' = (7,4)
-let%test _ = encoder_lettre t9_map 't' = (8,1)
-let%test _ = encoder_lettre t9_map 'u' = (8,2)
-let%test _ = encoder_lettre t9_map 'v' = (8,3)
-let%test _ = encoder_lettre t9_map 'w' = (9,1)
-let%test _ = encoder_lettre t9_map 'x' = (9,2)
-let%test _ = encoder_lettre t9_map 'y' = (9,3)
-let%test _ = encoder_lettre t9_map 'z' = (9,4)
-let%test _ = try let _ = encoder_lettre t9_map '&' in false with _ -> true  
-
-let%test _ = encoder_lettre stupide_map 'a' = (2,1)
-let%test _ = encoder_lettre stupide_map 'b' = (3,1)
-let%test _ = encoder_lettre stupide_map 'c' = (3,2)
-let%test _ = encoder_lettre stupide_map 'd' = (3,3)
-let%test _ = encoder_lettre stupide_map 'e' = (2,2)
-let%test _ = encoder_lettre stupide_map 'f' = (3,4)
-let%test _ = encoder_lettre stupide_map 'g' = (3,5)
-let%test _ = encoder_lettre stupide_map 'h' = (3,6)
-let%test _ = encoder_lettre stupide_map 'i' = (2,3)
-let%test _ = encoder_lettre stupide_map 'j' = (3,7)
-let%test _ = encoder_lettre stupide_map 'k' = (3,8)
-let%test _ = encoder_lettre stupide_map 'l' = (3,9)
-let%test _ = encoder_lettre stupide_map 'm' = (3,10)
-let%test _ = encoder_lettre stupide_map 'n' = (3,11)
-let%test _ = encoder_lettre stupide_map 'o' = (2,4)
-let%test _ = encoder_lettre stupide_map 'p' = (3,12)
-let%test _ = encoder_lettre stupide_map 'q' = (3,13)
-let%test _ = encoder_lettre stupide_map 'r' = (3,14)
-let%test _ = encoder_lettre stupide_map 's' = (3,15)
-let%test _ = encoder_lettre stupide_map 't' = (3,16)
-let%test _ = encoder_lettre stupide_map 'u' = (2,5)
-let%test _ = encoder_lettre stupide_map 'v' = (3,17)
-let%test _ = encoder_lettre stupide_map 'w' = (3,18)
-let%test _ = encoder_lettre stupide_map 'x' = (3,19)
-let%test _ = encoder_lettre stupide_map 'y' = (2,6)
-let%test _ = encoder_lettre stupide_map 'z' = (3,20)     
-let%test _ = try let _ = encoder_lettre stupide_map '&' in false with _ -> true       
+     char -> bool
+     Check si un char est une lettres minuscule (code compris entre 97 et 122 en ASCII)
 *)
+let rec is_valid_char c =
+  let code = Char.code c in
+  code >= 97 && code <= 122
 
+let rec encoder_lettre ((digit, chars) :: q) chr =
+  if not (is_valid_char chr) then raise (NotALetter chr)
+  else
+    match find_index (fun c -> c = chr) chars with
+    | None -> encoder_lettre q chr
+    | Some index -> (digit, index + 1)
+
+let%test _ = encoder_lettre t9_map 'a' = (2, 1)
+let%test _ = encoder_lettre t9_map 'b' = (2, 2)
+let%test _ = encoder_lettre t9_map 'c' = (2, 3)
+let%test _ = encoder_lettre t9_map 'd' = (3, 1)
+let%test _ = encoder_lettre t9_map 'e' = (3, 2)
+let%test _ = encoder_lettre t9_map 'f' = (3, 3)
+let%test _ = encoder_lettre t9_map 'g' = (4, 1)
+let%test _ = encoder_lettre t9_map 'h' = (4, 2)
+let%test _ = encoder_lettre t9_map 'i' = (4, 3)
+let%test _ = encoder_lettre t9_map 'j' = (5, 1)
+let%test _ = encoder_lettre t9_map 'k' = (5, 2)
+let%test _ = encoder_lettre t9_map 'l' = (5, 3)
+let%test _ = encoder_lettre t9_map 'm' = (6, 1)
+let%test _ = encoder_lettre t9_map 'n' = (6, 2)
+let%test _ = encoder_lettre t9_map 'o' = (6, 3)
+let%test _ = encoder_lettre t9_map 'p' = (7, 1)
+let%test _ = encoder_lettre t9_map 'q' = (7, 2)
+let%test _ = encoder_lettre t9_map 'r' = (7, 3)
+let%test _ = encoder_lettre t9_map 's' = (7, 4)
+let%test _ = encoder_lettre t9_map 't' = (8, 1)
+let%test _ = encoder_lettre t9_map 'u' = (8, 2)
+let%test _ = encoder_lettre t9_map 'v' = (8, 3)
+let%test _ = encoder_lettre t9_map 'w' = (9, 1)
+let%test _ = encoder_lettre t9_map 'x' = (9, 2)
+let%test _ = encoder_lettre t9_map 'y' = (9, 3)
+let%test _ = encoder_lettre t9_map 'z' = (9, 4)
+
+let%test _ =
+  try
+    let _ = encoder_lettre t9_map '&' in
+    false
+  with _ -> true
+
+let%test _ = encoder_lettre stupide_map 'a' = (2, 1)
+let%test _ = encoder_lettre stupide_map 'b' = (3, 1)
+let%test _ = encoder_lettre stupide_map 'c' = (3, 2)
+let%test _ = encoder_lettre stupide_map 'd' = (3, 3)
+let%test _ = encoder_lettre stupide_map 'e' = (2, 2)
+let%test _ = encoder_lettre stupide_map 'f' = (3, 4)
+let%test _ = encoder_lettre stupide_map 'g' = (3, 5)
+let%test _ = encoder_lettre stupide_map 'h' = (3, 6)
+let%test _ = encoder_lettre stupide_map 'i' = (2, 3)
+let%test _ = encoder_lettre stupide_map 'j' = (3, 7)
+let%test _ = encoder_lettre stupide_map 'k' = (3, 8)
+let%test _ = encoder_lettre stupide_map 'l' = (3, 9)
+let%test _ = encoder_lettre stupide_map 'm' = (3, 10)
+let%test _ = encoder_lettre stupide_map 'n' = (3, 11)
+let%test _ = encoder_lettre stupide_map 'o' = (2, 4)
+let%test _ = encoder_lettre stupide_map 'p' = (3, 12)
+let%test _ = encoder_lettre stupide_map 'q' = (3, 13)
+let%test _ = encoder_lettre stupide_map 'r' = (3, 14)
+let%test _ = encoder_lettre stupide_map 's' = (3, 15)
+let%test _ = encoder_lettre stupide_map 't' = (3, 16)
+let%test _ = encoder_lettre stupide_map 'u' = (2, 5)
+let%test _ = encoder_lettre stupide_map 'v' = (3, 17)
+let%test _ = encoder_lettre stupide_map 'w' = (3, 18)
+let%test _ = encoder_lettre stupide_map 'x' = (3, 19)
+let%test _ = encoder_lettre stupide_map 'y' = (2, 6)
+let%test _ = encoder_lettre stupide_map 'z' = (3, 20)
+
+let%test _ =
+  try
+    let _ = encoder_lettre stupide_map '&' in
+    false
+  with _ -> true
 
 (* TODO *)
-let creer_liste = fun _ -> assert false
+let creer_liste _ = assert false
 
 (* TESTS *)
 (* TODO *)
@@ -116,7 +144,7 @@ let creer_liste = fun _ -> assert false
 (* Renvoie la liste des touches à composer *)
 (* Exception si le mot contient un caractère qui n'est pas une lettre minuscule *)
 
-let encoder_mot = fun _ -> assert false
+let encoder_mot _ = assert false
 
 (*
 let%test _ = encoder_mot t9_map "" = []
@@ -140,14 +168,13 @@ let%test _ = try let _ = encoder_mot stupide_map "ab&c" in false with _ -> true
 (* Décodage *)
 (************)
 
-
 (* decoder_lettre -> encodage -> int * int -> char *)
 (* Identifie la lettre saisie à partir d'une touche et du nombre de fois qu'elle a été appuyée *)
 (* Le premier paramètre est la liste d'encodage (ie quelle touche correspond à quelles lettres) *)
 (* Le second paramètre est un couple (touche,  nombre de fois qu'elle a été appuyée) *)
 (* Renvoie la lettre associée *)
 (* Exception CodeInvalide si la combinaison ne correspond à aucune lettre *)
-let decoder_lettre = fun _ -> assert false
+let decoder_lettre _ = assert false
 
 (*
 let%test _ = decoder_lettre t9_map (2,1) = 'a'
@@ -209,7 +236,6 @@ let%test _ = try let _ = decoder_lettre stupide_map (9,1) in false with CodeInva
 let%test _ = try let _ = decoder_lettre stupide_map (4,3) in false with CodeInvalide -> true
 *)
 
-
 (* decoder_mot -> encodage -> int list -> string *)
 (* Identifie le mot saisi à partir d'une suite de touches  *)
 (* Le premier paramètre est la liste d'encodage (ie quelle touche correspond à quelles lettres) *)
@@ -217,7 +243,7 @@ let%test _ = try let _ = decoder_lettre stupide_map (4,3) in false with CodeInva
 (* Renvoie le mot saisi *)
 (* Exception CodeInvalide si une partie de la combinaison ne correspond à aucune lettre *)
 
-let decoder_mot = fun _ -> assert false
+let decoder_mot _ = assert false
 
 (*
 let%test _ = decoder_mot t9_map [] = ""
