@@ -452,9 +452,15 @@ let%test _ = decoder_mot dico_fr_stupide [ 4; 3; 2 ] = []
 
 (* max_mots_code_identique : dico -> int *)
 (* Calcule le nombre maximum de mots associés à un même code dans un dictionnaire *)
-let max_mots_code_identique _ = assert false
 
-(*
+(* https://ocaml.org/docs/lists *)
+let max_in_list = List.fold_left max min_int
+
+let rec max_mots_code_identique (Noeud (words, childs)) =
+  max_in_list
+    (List.length words
+    :: List.map (fun (_, d) -> max_mots_code_identique d) childs)
+
 let%test _ = max_mots_code_identique a9_1 = 3
 let%test _ = max_mots_code_identique a9_2 = 3
 let%test _ = max_mots_code_identique a8 = 3
@@ -468,7 +474,6 @@ let%test _ = max_mots_code_identique a1 = 1
 let%test _ = max_mots_code_identique empty = 0
 let%test _ = max_mots_code_identique dico_fr = 8
 let%test _ = max_mots_code_identique dico_fr_stupide = 1155
-*)
 
 (* lister : dico -> string liste *)
 (* Créer la liste de tous les mots d'un dictionnaire *)
