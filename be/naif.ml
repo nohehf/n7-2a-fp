@@ -144,6 +144,8 @@ let%test _ =
          - n: la taille de la liste
          - e: l'element pour remplir la liste
      Leve une exception Invalid_argument si n < 0
+
+     Note: j'ai utilisé la librairie standard, mais l'implémetation est triviale
 *)
 let creer_liste n e = List.init n (fun _ -> e)
 
@@ -174,25 +176,140 @@ let%test _ =
 (* Renvoie la liste des touches à composer *)
 (* Exception si le mot contient un caractère qui n'est pas une lettre minuscule *)
 
-let encoder_mot _ = assert false
-
-(*
-let%test _ = encoder_mot t9_map "" = []
-let%test _ = encoder_mot t9_map "a" = [2;0]
-let%test _ = encoder_mot t9_map "bonjour" = [2; 2; 0; 6; 6; 6; 0; 6; 6; 0; 5; 0; 6; 6; 6; 0; 8; 8; 0; 7; 7; 7; 0]
-let%test _ = encoder_mot t9_map "ocaml" = [6; 6; 6; 0; 2; 2; 2; 0; 2; 0; 6; 0; 5; 5; 5; 0]
-let%test _ = try let _ = encoder_mot t9_map "ab&c" in false with _ -> true  
-let%test _ = encoder_mot stupide_map "" = []
-let%test _ = encoder_mot stupide_map "a" = [2;0]
-let%test _ = encoder_mot stupide_map "bonjour" = 
-             [3; 0; 2; 2; 2; 2; 0; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 0; 3; 3; 3; 3; 3; 3; 3;
-              0; 2; 2; 2; 2; 0; 2; 2; 2; 2; 2; 0; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3;
-              0]
-let%test _ = encoder_mot stupide_map "ocaml" =
-             [2; 2; 2; 2; 0; 3; 3; 0; 2; 0; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 0; 3; 3; 3; 3; 3;
-              3; 3; 3; 3; 0]
-let%test _ = try let _ = encoder_mot stupide_map "ab&c" in false with _ -> true  
+(* NOTE: J'ai ajouté une fonciton auxiliaire
+   afin d'eviter un appel a décompose et recompose a chaque appel récursif
 *)
+let encoder_mot map word =
+  let word_chars = decompose_chaine word in
+  let rec encoder_list_chars chars =
+    match chars with
+    | [] -> []
+    | chr :: q ->
+        let digit, times = encoder_lettre map chr in
+        creer_liste times digit @ [ 0 ] @ encoder_list_chars q
+  in
+  encoder_list_chars word_chars
+
+let%test _ = encoder_mot t9_map "" = []
+let%test _ = encoder_mot t9_map "a" = [ 2; 0 ]
+
+let%test _ =
+  encoder_mot t9_map "bonjour"
+  = [ 2; 2; 0; 6; 6; 6; 0; 6; 6; 0; 5; 0; 6; 6; 6; 0; 8; 8; 0; 7; 7; 7; 0 ]
+
+let%test _ =
+  encoder_mot t9_map "ocaml"
+  = [ 6; 6; 6; 0; 2; 2; 2; 0; 2; 0; 6; 0; 5; 5; 5; 0 ]
+
+let%test _ =
+  try
+    let _ = encoder_mot t9_map "ab&c" in
+    false
+  with _ -> true
+
+let%test _ = encoder_mot stupide_map "" = []
+let%test _ = encoder_mot stupide_map "a" = [ 2; 0 ]
+
+(* Note: désolé ocamlformat est pas très futé ici appremment *)
+let%test _ =
+  encoder_mot stupide_map "bonjour"
+  = [
+      3;
+      0;
+      2;
+      2;
+      2;
+      2;
+      0;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      0;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      0;
+      2;
+      2;
+      2;
+      2;
+      0;
+      2;
+      2;
+      2;
+      2;
+      2;
+      0;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      0;
+    ]
+
+let%test _ =
+  encoder_mot stupide_map "ocaml"
+  = [
+      2;
+      2;
+      2;
+      2;
+      0;
+      3;
+      3;
+      0;
+      2;
+      0;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      0;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      0;
+    ]
+
+let%test _ =
+  try
+    let _ = encoder_mot stupide_map "ab&c" in
+    false
+  with _ -> true
 
 (************)
 (* Décodage *)
