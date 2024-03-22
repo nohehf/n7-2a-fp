@@ -91,22 +91,27 @@ let%test _ = encoder_lettre stupide_map '&' = 0
 (* Le second paramètre est le mot à encoder *)
 (* Renvoie la liste des touches à composer *)
 
-let encoder_mot _ = assert false
+let encoder_mot map word =
+  let word_chars = decompose_chaine word in
+  let rec encoder_list_chars chars =
+    match chars with
+    | [] -> []
+    | chr :: q ->
+        let digit = encoder_lettre map chr in
+        digit :: encoder_list_chars q
+  in
+  encoder_list_chars word_chars
 
-(*
 let%test _ = encoder_mot t9_map "" = []
-let%test _ = encoder_mot t9_map "a" = [2]
-let%test _ = encoder_mot t9_map "bonjour" = [2; 6; 6; 5; 6; 8; 7]
-let%test _ = encoder_mot t9_map "bonjour!" = [2; 6; 6; 5; 6; 8; 7; 0]
-let%test _ = encoder_mot t9_map "ocaml" = [6; 2 ; 2 ; 6; 5]
-
-
+let%test _ = encoder_mot t9_map "a" = [ 2 ]
+let%test _ = encoder_mot t9_map "bonjour" = [ 2; 6; 6; 5; 6; 8; 7 ]
+let%test _ = encoder_mot t9_map "bonjour!" = [ 2; 6; 6; 5; 6; 8; 7; 0 ]
+let%test _ = encoder_mot t9_map "ocaml" = [ 6; 2; 2; 6; 5 ]
 let%test _ = encoder_mot stupide_map "" = []
-let%test _ = encoder_mot stupide_map "a" = [2]
-let%test _ = encoder_mot stupide_map "bonjour" = [3;2;3;3;2;2;3]
-let%test _ = encoder_mot stupide_map "bonjour!" = [3;2;3;3;2;2;3;0]
-let%test _ = encoder_mot stupide_map "ocaml" = [2;3;2;3;3]
-*)
+let%test _ = encoder_mot stupide_map "a" = [ 2 ]
+let%test _ = encoder_mot stupide_map "bonjour" = [ 3; 2; 3; 3; 2; 2; 3 ]
+let%test _ = encoder_mot stupide_map "bonjour!" = [ 3; 2; 3; 3; 2; 2; 3; 0 ]
+let%test _ = encoder_mot stupide_map "ocaml" = [ 2; 3; 2; 3; 3 ]
 
 (***************************************************************************)
 (* Décodage                                                                *)
