@@ -322,7 +322,6 @@ let%test _ =
 (* Renvoie la lettre associée *)
 (* Exception CodeInvalide si la combinaison ne correspond à aucune lettre *)
 
-(* TODO code invalide *)
 let decoder_lettre map (digit, times) =
   try List.nth (snd (List.find (fun (d, _) -> d = digit) map)) (times - 1)
   with _ -> raise CodeInvalide
@@ -412,23 +411,160 @@ let%test _ =
 (* Renvoie le mot saisi *)
 (* Exception CodeInvalide si une partie de la combinaison ne correspond à aucune lettre *)
 
-let decoder_mot _ = assert false
+(* let decoder_mot map digits =
+   snd
+     (List.fold_right
+        (fun digit ((_digit, times), chars) ->
+          if digit = 0 then ((0, 0), decoder_lettre map (_digit, times) :: chars)
+          else ((digit, times + 1), chars))
+        digits
+        ((0, 0), [])) *)
 
-(*
+let decoder_mot_to_char_list map digits =
+  let rec aux (_d, times) _digits =
+    match _digits with
+    | [] -> []
+    | d :: q ->
+        if d = 0 then decoder_lettre map (_d, times) :: aux (0, 0) q
+        else aux (d, times + 1) q
+  in
+  aux (0, 0) digits
+
+let decoder_mot map digits =
+  recompose_chaine (decoder_mot_to_char_list map digits)
+
+(* Bonus, si dessous ma tentative ratee et bien trop longue pour l'ecrire avec un fold right *)
+(* let decoder_mot map digits =
+   snd
+     (List.fold_right
+        (fun digit ((_digit, times), chars) ->
+          if digit = 0 then ((0, 0), decoder_lettre map (_digit, times) :: chars)
+          else ((digit, times + 1), chars))
+        (List.rev digits @ [ 0 ])
+        ((0, 0), [])) *)
+
 let%test _ = decoder_mot t9_map [] = ""
-let%test _ = decoder_mot t9_map [2;0] = "a"
-let%test _ = decoder_mot t9_map [2; 2; 0; 6; 6; 6; 0; 6; 6; 0; 5; 0; 6; 6; 6; 0; 8; 8; 0; 7; 7; 7; 0] = "bonjour"
-let%test _ = decoder_mot t9_map [6; 6; 6; 0; 2; 2; 2; 0; 2; 0; 6; 0; 5; 5; 5; 0] = "ocaml"
-let%test _ = try let _ = decoder_mot t9_map [2; 2; 2; 2; 0] in false with CodeInvalide -> true
+let%test _ = decoder_mot t9_map [ 2; 0 ] = "a"
+
+let%test _ =
+  decoder_mot t9_map
+    [ 2; 2; 0; 6; 6; 6; 0; 6; 6; 0; 5; 0; 6; 6; 6; 0; 8; 8; 0; 7; 7; 7; 0 ]
+  = "bonjour"
+
+let%test _ =
+  decoder_mot t9_map [ 6; 6; 6; 0; 2; 2; 2; 0; 2; 0; 6; 0; 5; 5; 5; 0 ]
+  = "ocaml"
+
+let%test _ =
+  try
+    let _ = decoder_mot t9_map [ 2; 2; 2; 2; 0 ] in
+    false
+  with CodeInvalide -> true
 
 let%test _ = decoder_mot stupide_map [] = ""
-let%test _ = decoder_mot stupide_map [2;0] = "a"
-let%test _ = decoder_mot stupide_map  
-    [3; 0; 2; 2; 2; 2; 0; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 0; 3; 3; 3; 3; 3; 3; 3;
-     0; 2; 2; 2; 2; 0; 2; 2; 2; 2; 2; 0; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3;
-     0] = "bonjour"
-let%test _ = decoder_mot stupide_map
-    [2; 2; 2; 2; 0; 3; 3; 0; 2; 0; 3; 3; 3; 3; 3; 3; 3; 3; 3; 3; 0; 3; 3; 3; 3; 3;
-     3; 3; 3; 3; 0] = "ocaml"
-let%test _ = try let _ = decoder_mot stupide_map [2; 2; 0; 6; 6; 6; 0; 6; 6; 0; 5; 0; 6; 6; 6; 0; 8; 8; 0; 7; 7; 7; 0] in false with _ -> true  
-*)
+let%test _ = decoder_mot stupide_map [ 2; 0 ] = "a"
+
+let%test _ =
+  decoder_mot stupide_map
+    [
+      3;
+      0;
+      2;
+      2;
+      2;
+      2;
+      0;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      0;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      0;
+      2;
+      2;
+      2;
+      2;
+      0;
+      2;
+      2;
+      2;
+      2;
+      2;
+      0;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      0;
+    ]
+  = "bonjour"
+
+let%test _ =
+  decoder_mot stupide_map
+    [
+      2;
+      2;
+      2;
+      2;
+      0;
+      3;
+      3;
+      0;
+      2;
+      0;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      0;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      3;
+      0;
+    ]
+  = "ocaml"
+
+let%test _ =
+  try
+    let _ =
+      decoder_mot stupide_map
+        [ 2; 2; 0; 6; 6; 6; 0; 6; 6; 0; 5; 0; 6; 6; 6; 0; 8; 8; 0; 7; 7; 7; 0 ]
+    in
+    false
+  with _ -> true
