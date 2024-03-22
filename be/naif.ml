@@ -58,6 +58,12 @@ let rec is_valid_char c =
   let code = Char.code c in
   code >= 97 && code <= 122
 
+let%test _ = is_valid_char 'a'
+let%test _ = is_valid_char 'g'
+let%test _ = is_valid_char 'z'
+let%test _ = not (is_valid_char '1')
+let%test _ = not (is_valid_char '.')
+
 let rec encoder_lettre ((digit, chars) :: q) chr =
   if not (is_valid_char chr) then raise (NotALetter chr)
   else
@@ -131,11 +137,35 @@ let%test _ =
     false
   with _ -> true
 
-(* TODO *)
-let creer_liste _ = assert false
+(*
+     creer_liste: int -> 'a -> 'a list
+     Cree une liste contenant n * l'element e
+     Parametres:
+         - n: la taille de la liste
+         - e: l'element pour remplir la liste
+     Leve une exception Invalid_argument si n < 0
+*)
+let creer_liste n e = List.init n (fun _ -> e)
 
 (* TESTS *)
-(* TODO *)
+let%test _ = creer_liste 0 'a' = []
+let%test _ = creer_liste 0 [] = []
+let%test _ = creer_liste 0 "hello" = []
+let%test _ = creer_liste 0 1 = []
+let%test _ = creer_liste 1 'a' = [ 'a' ]
+let%test _ = creer_liste 1 [] = [ [] ]
+let%test _ = creer_liste 1 "hello" = [ "hello" ]
+let%test _ = creer_liste 1 1 = [ 1 ]
+let%test _ = creer_liste 3 'a' = [ 'a'; 'a'; 'a' ]
+let%test _ = creer_liste 3 [] = [ []; []; [] ]
+let%test _ = creer_liste 3 "hello" = [ "hello"; "hello"; "hello" ]
+let%test _ = creer_liste 3 1 = [ 1; 1; 1 ]
+
+let%test _ =
+  try
+    let _ = creer_liste (-1) 'a' in
+    false
+  with _ -> true
 
 (* encoder_mot : encodage -> string -> int list *)
 (* Encode un mot, c'est à dire indique la suite de touche à appuyer pour saisir le mot *)
